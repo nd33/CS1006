@@ -9,7 +9,9 @@ public class RBracketToken extends Token {
         numberOfRBrackets = 0;
     }
 
-    public RBracketToken () {
+    public RBracketToken (int lineNumber)
+    {
+        super(lineNumber);
         numberOfRBrackets ++;
     }
 }

@@ -1,6 +1,5 @@
-/**
- * Created by jm360 on 05/02/16.
- */
+
+
 public class MoveStatment extends Statment {
     String move;
     Expression argument;
@@ -17,6 +16,6 @@ public class MoveStatment extends Statment {
     }
 
     public String codeString () {
-        return argument.toString() + "\n" + move + "\n";
+        return argument.codeString() + "/Arg exch def\n" + move + "\n";
     }
 }

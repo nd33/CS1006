@@ -68,46 +68,49 @@ public class Lexer {
         ArrayList<String> words = pairDoubleOperators(splitIntoWords(input));
         ArrayList <Token> result = new ArrayList<Token>();
         boolean statment = false;
+        int currentLine = 1;
 
         for (String currentWord : words) {
             if (currentWord.equals("FORWARD") || currentWord.equals("LEFT") || currentWord.equals("RIGHT")) {
-                result.add(new MoveToken(currentWord));
+                result.add(new MoveToken(currentWord, currentLine));
                 statment = true;
             } else if (currentWord.equals("+") || currentWord.equals("-") || currentWord.equals("/") || currentWord.equals("*")
                     || currentWord.equals("==") || currentWord.equals("!=") || currentWord.equals("<=") || currentWord.equals(">=")
                     || currentWord.equals("<") || currentWord.equals(">")) {
-                result.add(new OperatorToken(currentWord));
+                result.add(new OperatorToken(currentWord, currentLine));
             }else if (currentWord.equals("(")) {
-                result.add(new LBracketToken());
+                result.add(new LBracketToken(currentLine));
             } else if (currentWord.equals(")")) {
-                result.add(new RBracketToken());
+                result.add(new RBracketToken(currentLine));
             } else if (currentWord.equals("IF")) {
-                result.add(new IfToken());
+                result.add(new IfToken(currentLine));
             } else if (currentWord.equals("THEN")) {
-                result.add(new ThenToken());
+                result.add(new ThenToken(currentLine));
             } else if (currentWord.equals("ELSE")) {
-                result.add(new ElseToken());
+                result.add(new ElseToken(currentLine));
             } else if (currentWord.equals("ENDIF")) {
-                result.add(new EndIfToken());
+                result.add(new EndIfToken(currentLine));
             } else if (currentWord.equals("PROC")) {
-                result.add(new ProcedureToken());
+                result.add(new ProcedureToken(currentLine));
             } else if (currentWord.equals("0") || (currentWord.charAt(0) > 48 && currentWord.charAt(0) < 58)) {
                 try {
-                    result.add(new NumberToken(Integer.valueOf(currentWord)));
+                    result.add(new NumberToken(Integer.valueOf(currentWord), currentLine));
                 } catch (NumberFormatException e) {
-
+                    //Add Error
+                    result.add(new NumberToken(0, currentLine));
                 }
             } else if (currentWord.equals("\n")) {
                 if (statment) {
                     //result.add(new EOSToken());
                     statment = false;
                 }
+                currentLine ++;
             } else {
-                result.add(new IdentifierToken(currentWord));
+                result.add(new IdentifierToken(currentWord, currentLine));
             }
         }
 
-        result.add(new EOIToken());
+        result.add(new EOIToken(currentLine));
 
         return result;
     }

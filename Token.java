@@ -1,6 +1,11 @@
 public abstract class Token {
     protected int lineNumber;
     boolean legal;
+
+    public Token (int lineNumber) {
+        this.lineNumber = lineNumber;
+    }
+
     public int getPrecedence (){
         //Override for Operators
         return 0;

@@ -21,9 +21,9 @@ public class PrimaryExpression extends Expression {
 
     public String codeString () {
         if (isNumber) {
-            return Integer.toString(value);
+            return Integer.toString(value) + "\n";
         } else {
-            return name;
+            return name + "\n";
         }
     }
 }

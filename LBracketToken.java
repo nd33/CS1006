@@ -9,7 +9,8 @@ public class LBracketToken extends Token {
         numberOfLBrackets = 0;
     }
 
-    public LBracketToken () {
+    public LBracketToken (int lineNumber) {
+        super(lineNumber);
         numberOfLBrackets ++;
     }
 }

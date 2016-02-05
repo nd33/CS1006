@@ -26,4 +26,8 @@ public class IfStatment extends Statment {
         Parser.nextToken();
         return result;
     }
+
+    public String codeString () {
+        return condition.codeString() + "{\n" + then.codeString() + "} {\n" + or.codeString() + "} ifelse \n";
+    }
 }

@@ -1,7 +1,9 @@
 public class NumberToken extends Token {
     private int value;
 
-    public NumberToken (int value) {
+    public NumberToken (int value, int lineNumber)
+    {
+        super(lineNumber);
         this.value = value;
     }
 

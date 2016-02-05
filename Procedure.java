@@ -30,4 +30,8 @@ public class Procedure {
         result.body = Statments.parse();
         return result;
     }
+
+    public String codeString () {
+        return "/" + name + "{\n" + body.codeString() + "} def\n";
+    }
 }

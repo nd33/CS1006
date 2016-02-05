@@ -22,4 +22,12 @@ public class Root {
 
         return result;
     }
+
+    public String codeString () {
+        String result = "";
+        for (Procedure p : procs) {
+            result += p.codeString();
+        }
+        return result;
+    }
 }

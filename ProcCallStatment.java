@@ -20,4 +20,8 @@ public class ProcCallStatment extends Statment {
         Parser.nextToken();
         return result;
     }
+
+    public String codeString () {
+        return argument.toString() + "/Arg exch def\n" + procedure + "\n";
+    }
 }

@@ -15,4 +15,12 @@ public class Statments {
         }
         return result;
     }
+
+    public String codeString () {
+        String result = "";
+        for (Statment s : statments) {
+            result += s.codeString();
+        }
+        return result;
+    }
 }

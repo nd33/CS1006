@@ -1,7 +1,9 @@
 public class OperatorToken extends Token {
     private String operator;
 
-    public OperatorToken (String operator) {
+    public OperatorToken (String operator, int lineNumber)
+    {
+        super(lineNumber);
         this.operator = operator;
     }
 

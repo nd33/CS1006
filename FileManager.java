@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class FileManager {
     static String contentsOfFile(String fileLocation) throws IOException {
@@ -18,4 +15,11 @@ public class FileManager {
 
         return result;
     }
+
+    static void writeStringToFile (String string, String fileLocation) throws IOException {
+        PrintWriter printWriter = new PrintWriter(fileLocation);
+        printWriter.print(string);
+        printWriter.close();
+    }
+
 }
