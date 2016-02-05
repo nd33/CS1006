@@ -92,7 +92,11 @@ public class Lexer {
             } else if (currentWord.equals("PROC")) {
                 result.add(new ProcedureToken());
             } else if (currentWord.equals("0") || (currentWord.charAt(0) > 48 && currentWord.charAt(0) < 58)) {
-                result.add(new NumberToken(Integer.valueOf(currentWord)));
+                try {
+                    result.add(new NumberToken(Integer.valueOf(currentWord)));
+                } catch (NumberFormatException e) {
+
+                }
             } else if (currentWord.equals("\n")) {
                 if (statment) {
                     result.add(new EOSToken());
