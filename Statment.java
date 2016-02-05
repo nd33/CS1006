@@ -15,4 +15,8 @@ public class Statment {
         }
         return result;
     }
+
+    public String codeString () {
+        return "";
+    }
 }

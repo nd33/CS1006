@@ -15,4 +15,8 @@ public class MoveStatment extends Statment {
         result.argument = Expression.parse();
         return result;
     }
+
+    public String codeString () {
+        return argument.toString() + "\n" + move + "\n";
+    }
 }

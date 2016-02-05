@@ -14,4 +14,8 @@ public class Expression {
         }
         //Add Error checking for invalid expression end
     }
+
+    public String codeString () {
+        return "";
+    }
 }

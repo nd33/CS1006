@@ -1,6 +1,4 @@
-/**
- * Created by jm360 on 05/02/16.
- */
+
 public class PrimaryExpression extends Expression {
     int value;
     boolean isNumber;
@@ -19,5 +17,13 @@ public class PrimaryExpression extends Expression {
         }
         Parser.nextToken();
         return result;
+    }
+
+    public String codeString () {
+        if (isNumber) {
+            return Integer.toString(value);
+        } else {
+            return name;
+        }
     }
 }
