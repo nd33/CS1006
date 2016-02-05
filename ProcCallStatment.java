@@ -22,6 +22,6 @@ public class ProcCallStatment extends Statment {
     }
 
     public String codeString () {
-        return argument.toString() + "/Arg exch def\n" + procedure + "\n";
+        return argument.codeString() + "/Arg exch def\n" + procedure + "\n";
     }
 }

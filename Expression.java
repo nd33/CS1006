@@ -1,7 +1,7 @@
 /**
  * Created by jm360 on 05/02/16.
  */
-public class Expression {
+public class Expression extends ABSElement {
     public static Expression parse () {
         Token tempToken = Parser.currentToken;
         Parser.nextToken();

@@ -24,6 +24,17 @@ public class Parser {
         }
     }
 
+    public static boolean moveToNext (Token token) {
+        for (int i = input.indexOf(currentToken) + 1; i < input.size(); i ++) {
+            if (input.get(i).getClass() == token.getClass()) {
+                currentToken = input.get(i);
+                return true;
+            }
+        }
+        //If no further such token is found return false
+        return false;
+    }
+
     public static Root parse (ArrayList<Token> input) {
         Root program = new Root();
         Parser.input = input;

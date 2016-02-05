@@ -1,9 +1,6 @@
 import java.util.ArrayList;
 
-/**
- * Created by jm360 on 05/02/16.
- */
-public class Root {
+public class Root extends ABSElement {
     ArrayList<Procedure> procs;
 
     public Root () {

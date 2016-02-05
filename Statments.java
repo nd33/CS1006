@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 
-public class Statments {
+public class Statments extends ABSElement {
     ArrayList<Statment> statments;
 
     public Statments () {
