@@ -27,7 +27,7 @@ public class Procedure {
             //Add Error
         }
         Parser.nextToken();
-
+        result.body = Statments.parse();
         return result;
     }
 }
