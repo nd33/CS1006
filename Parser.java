@@ -30,6 +30,9 @@ public class Parser {
         if (input.size() > 0) {
             currentToken = input.get(0);
         }
+        while (Parser.currentToken instanceof ProcedureToken) {
+            program.procs.add(Procedure.parse());
+        }
         return program;
     }
 }
