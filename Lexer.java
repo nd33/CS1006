@@ -99,7 +99,7 @@ public class Lexer {
                 }
             } else if (currentWord.equals("\n")) {
                 if (statment) {
-                    result.add(new EOSToken());
+                    //result.add(new EOSToken());
                     statment = false;
                 }
             } else {
