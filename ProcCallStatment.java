@@ -14,10 +14,12 @@ public class ProcCallStatment extends Statment {
         }
         //Parser.nextToken();
         result.argument = Expression.parse();
+        Parser.previousToken();
         if (!(Parser.currentToken instanceof RBracketToken)) {
             //Add Error
         }
         Parser.nextToken();
+        //Parser.nextToken();
         return result;
     }
 

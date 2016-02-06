@@ -68,7 +68,9 @@ public class Lexer {
         ArrayList<String> words = pairDoubleOperators(splitIntoWords(input));
         ArrayList <Token> result = new ArrayList<Token>();
         boolean statment = false;
+        boolean proc = false;
         int currentLine = 1;
+        Token previousToken = new EOSToken(0);
 
         for (String currentWord : words) {
             if (currentWord.equals("FORWARD") || currentWord.equals("LEFT") || currentWord.equals("RIGHT")) {
@@ -80,6 +82,11 @@ public class Lexer {
                 result.add(new OperatorToken(currentWord, currentLine));
             }else if (currentWord.equals("(")) {
                 result.add(new LBracketToken(currentLine));
+                if (previousToken instanceof IdentifierToken && !proc) {
+                    statment = true;
+                } else {
+                    proc = false;
+                }
             } else if (currentWord.equals(")")) {
                 result.add(new RBracketToken(currentLine));
             } else if (currentWord.equals("IF")) {
@@ -92,6 +99,7 @@ public class Lexer {
                 result.add(new EndIfToken(currentLine));
             } else if (currentWord.equals("PROC")) {
                 result.add(new ProcedureToken(currentLine));
+                proc = true;
             } else if (currentWord.equals("0") || (currentWord.charAt(0) > 48 && currentWord.charAt(0) < 58)) {
                 try {
                     result.add(new NumberToken(Integer.valueOf(currentWord), currentLine));
@@ -102,13 +110,14 @@ public class Lexer {
                 }
             } else if (currentWord.equals("\n")) {
                 if (statment) {
-                    //result.add(new EOSToken());
+                    result.add(new EOSToken(currentLine));
                     statment = false;
                 }
                 currentLine ++;
             } else {
                 result.add(new IdentifierToken(currentWord, currentLine));
             }
+            previousToken = result.get(result.size() - 1);
         }
 
         result.add(new EOIToken(currentLine));
