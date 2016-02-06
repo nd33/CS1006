@@ -11,6 +11,10 @@ public class Error {
         lineNumber = -1;
     }
 
+    public Error (int lineNumber, String problem) {
+        this(lineNumber, problem, null);
+    }
+
     public Error (int lineNumber, String problem, String potentialSolution) {
         this.lineNumber = lineNumber;
         this.problem = problem;

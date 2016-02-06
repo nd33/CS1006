@@ -96,7 +96,8 @@ public class Lexer {
                 try {
                     result.add(new NumberToken(Integer.valueOf(currentWord), currentLine));
                 } catch (NumberFormatException e) {
-                    //Add Error
+                    ErrorLog.logError(new Error(currentLine, currentWord + " is not a legal identifier or number"));
+                    //Add zero for the purposes finding further errors
                     result.add(new NumberToken(0, currentLine));
                 }
             } else if (currentWord.equals("\n")) {

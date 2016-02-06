@@ -1,21 +1,22 @@
+import java.util.ArrayList;
 
 public class PrimaryExpression extends Expression {
     int value;
     boolean isNumber;
     String name;
 
-    public static PrimaryExpression parse () {
+    public static PrimaryExpression parse (ArrayList<Token> RPNExpression) {
         PrimaryExpression result = new PrimaryExpression();
-        if (Parser.currentToken instanceof NumberToken) {
-            result.value = Parser.currentToken.getValue();
+        if (RPNExpression.get(0) instanceof NumberToken) {
+            result.value = RPNExpression.get(0).getValue();
             result.isNumber = true;
-        } else if (Parser.currentToken instanceof IdentifierToken) {
-            result.name = Parser.currentToken.getName();
+        } else if (RPNExpression.get(0) instanceof IdentifierToken) {
+            result.name = RPNExpression.get(0).getName();
             result.isNumber = false;
         } else {
             //Add Errors
         }
-        Parser.nextToken();
+        //Parser.nextToken();
         return result;
     }
 

@@ -12,7 +12,7 @@ public class ProcCallStatment extends Statment {
         if (!(Parser.currentToken instanceof LBracketToken)) {
             //Add Error
         }
-        Parser.nextToken();
+        //Parser.nextToken();
         result.argument = Expression.parse();
         if (!(Parser.currentToken instanceof RBracketToken)) {
             //Add Error
