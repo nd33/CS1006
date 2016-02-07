@@ -1,6 +1,4 @@
-/**
- * Created by jm360 on 05/02/16.
- */
+
 public class ProcCallStatment extends Statment {
     String procedure;
     Expression argument;

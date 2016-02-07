@@ -1,6 +1,4 @@
-/**
- * Created by joemarch on 05/02/2016.
- */
+
 public class Error {
     int lineNumber;
     String problem;
