@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Parser {
     public static Token currentToken;
     static ArrayList<Token> input;
+    public static String currProcArg;
 
     public static void nextToken () {
         if (currentToken == null) {
