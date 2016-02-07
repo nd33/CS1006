@@ -1,6 +1,6 @@
 
 	PROC LDRAGON ( LEVEL )
-	    IF LEVEL THEN
+	    IF LEVEL == 1 THEN
 		FORWARD 5 
 	    ELSE
 		LDRAGON ( 17 + 1 * 2 - 9 == 10)
