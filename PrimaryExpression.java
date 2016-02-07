@@ -23,7 +23,11 @@ public class PrimaryExpression extends Expression {
     public String codeString () {
         if (isNumber) {
             return value + "\n";
-        } else {
+        }else if(name.equals(Procedure.getArgument())){
+            return "Arg" + "\n";
+
+        }
+        else{
             return name + "\n";
         }
     }

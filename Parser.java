@@ -42,6 +42,7 @@ public class Parser {
             currentToken = input.get(0);
         }
         while (Parser.currentToken instanceof ProcedureToken) {
+
             program.procs.add(Procedure.parse());
         }
         return program;

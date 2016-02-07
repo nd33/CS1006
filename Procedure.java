@@ -1,7 +1,7 @@
 
 public class Procedure extends ABSElement {
     String name;
-    String argument;
+     static String argument;
     Statments body;
 
     public static Procedure parse () {
@@ -19,7 +19,7 @@ public class Procedure extends ABSElement {
         if (!(Parser.currentToken instanceof IdentifierToken)) {
             //Add Error
         }
-        result.argument = Parser.currentToken.getName();
+        result.setArgument(Parser.currentToken.getName());
         Parser.nextToken();
         if (!(Parser.currentToken instanceof RBracketToken)) {
             //Add Error
@@ -27,6 +27,14 @@ public class Procedure extends ABSElement {
         Parser.nextToken();
         result.body = Statments.parse();
         return result;
+    }
+
+    public static  String getArgument() {
+        return argument;
+    }
+
+    public static void setArgument(String argument) {
+        Procedure.argument = argument;
     }
 
     public String codeString () {
