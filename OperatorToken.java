@@ -1,4 +1,3 @@
-import sun.tools.jstat.Operator;
 
 public class OperatorToken extends Token {
     private String operator;
