@@ -20,6 +20,7 @@ public class FileManager {
         PrintWriter printWriter = new PrintWriter(fileLocation);
         printWriter.print(string);
         printWriter.close();
+
     }
 
 }

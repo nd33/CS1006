@@ -17,6 +17,10 @@ public class ErrorLog {
         containsErrors = false;
     }
 
+    public static boolean containsErrors () {
+        return containsErrors;
+    }
+
     public static void displayErrors () {
         if (errors == null) {
             return;

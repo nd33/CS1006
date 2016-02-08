@@ -1,12 +1,10 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Stack;
 
 public class Expression extends ABSElement {
 
     public static ArrayList isolateExpression () {
         ArrayList<Token> result = new ArrayList<Token>();
-        String lineNum;
 
         while (Parser.currentToken instanceof NumberToken || Parser.currentToken instanceof IdentifierToken ||
                 Parser.currentToken instanceof OperatorToken || Parser.currentToken instanceof LBracketToken ||
@@ -14,10 +12,6 @@ public class Expression extends ABSElement {
 
             result.add(Parser.currentToken);
             Parser.nextToken();
-
-
-
-
         }
 
         return result;
@@ -30,16 +24,19 @@ public class Expression extends ABSElement {
                 if (i == expression.size() - 1) {
                     return true;
                 } else if (!(expression.get(i + 1) instanceof RBracketToken) && !(expression.get(i + 1) instanceof OperatorToken))  {
-                    Error er = new Error(expression.get(i + 1).getLineNumber(), "Expected and operator or ')'");
-                    ErrorLog.logError(er);
+                    ErrorLog.logError(new Error(expression.get(i + 1).getLineNumber(), "Expected and operator or ')'"));
                     return false;
                 }
             } else if (expression.get(i) instanceof OperatorToken) {
-                if () {
-
-                }
+                if (i == expression.size() - 1) {
+                    ErrorLog.logError(new Error(expression.get(i).getLineNumber(), "Expecting a number or identifier"));
+                    return false;
+                } else if (expression.get(i + 1) instanceof OperatorToken) {
+                    ErrorLog.logError(new Error(expression.get(i).getLineNumber(), "Expecting a number or identifier"));
+                    return false;
                 }
             }
+        }
 
         return true;
     }
