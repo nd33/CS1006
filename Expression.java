@@ -6,6 +6,7 @@ public class Expression extends ABSElement {
 
     public static ArrayList isolateExpression () {
         ArrayList<Token> result = new ArrayList<Token>();
+        String lineNum;
 
         while (Parser.currentToken instanceof NumberToken || Parser.currentToken instanceof IdentifierToken ||
                 Parser.currentToken instanceof OperatorToken || Parser.currentToken instanceof LBracketToken ||
@@ -28,8 +29,9 @@ public class Expression extends ABSElement {
             if (expression.get(i) instanceof NumberToken || expression.get(i) instanceof IdentifierToken) {
                 if (i == expression.size() - 1) {
                     return true;
-                } else if (!(expresion.get(i + 1) instanceof RBToken) && !(expression.get(i + 1) instanceof OperatorToken))  {
-                    Errorlog.logError(expression.get(i + 1).getLineNumber, "Expected and operator or ')'");
+                } else if (!(expression.get(i + 1) instanceof RBracketToken) && !(expression.get(i + 1) instanceof OperatorToken))  {
+                    Error er = new Error(expression.get(i + 1).getLineNumber(), "Expected and operator or ')'");
+                    ErrorLog.logError(er);
                     return false;
                 }
             } else if (expression.get(i) instanceof OperatorToken) {
