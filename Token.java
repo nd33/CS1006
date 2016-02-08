@@ -6,6 +6,10 @@ public abstract class Token {
         this.lineNumber = lineNumber;
     }
 
+    public int getLineNumber () {
+        return lineNumber;
+    }
+
     public int getPrecedence (){
         //Override for Operators
         return 0;

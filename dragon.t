@@ -3,7 +3,7 @@
 	    IF LEVEL == 1 THEN
 		FORWARD 5 
 	    ELSE
-		LDRAGON ( 17 + 1 * 2 - 9 == 10)
+		LDRAGON ( LEVEL + 1)
 		LEFT 90
 		RDRAGON ( LEVEL )
 	    ENDIF 

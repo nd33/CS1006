@@ -4,38 +4,70 @@ import java.util.Stack;
 
 public class Expression extends ABSElement {
 
-    //Dijkstra's 'Shunting Yard' algorithm
-    public static ArrayList<Token> generateRPNExpression () {
+    public static ArrayList isolateExpression () {
         ArrayList<Token> result = new ArrayList<Token>();
-        Stack<Token> opStack = new Stack<Token>();
 
         while (Parser.currentToken instanceof NumberToken || Parser.currentToken instanceof IdentifierToken ||
                 Parser.currentToken instanceof OperatorToken || Parser.currentToken instanceof LBracketToken ||
                 Parser.currentToken instanceof RBracketToken) {
 
-            if (Parser.currentToken instanceof  NumberToken || Parser.currentToken instanceof IdentifierToken) {
+            result.add(Parser.currentToken);
+            Parser.nextToken();
 
-                result.add(Parser.currentToken);
+        }
 
-            } else if (Parser.currentToken instanceof OperatorToken) {
+        return result;
+    }
+
+    public static boolean isLegalExpression (ArrayList<Token> expression) {
+
+        for (int i = 0; i < expression.size(); i ++) {
+            if (expression.get(i) instanceof NumberToken || expression.get(i) instanceof IdentifierToken) {
+                if (i == expression.size() - 1) {
+                    return true;
+                } else if (!(expresion.get(i + 1) instanceof RBToken) && !(expression.get(i + 1) instanceof OperatorToken))  {
+                    Errorlog.logError(expression.get(i + 1).getLineNumber, "Expected and operator or ')'");
+                    return false;
+                }
+            } else if (expression.get(i) instanceof OperatorToken) {
+                if () {
+
+                }
+                }
+            }
+
+        return true;
+    }
+
+    //Dijkstra's 'Shunting Yard' algorithm
+    public static ArrayList<Token> generateRPNExpression (ArrayList<Token> expression) {
+        ArrayList<Token> result = new ArrayList<Token>();
+        Stack<Token> opStack = new Stack<Token>();
+
+        for (Token currentToken : expression) {
+            if (currentToken instanceof  NumberToken || currentToken instanceof IdentifierToken) {
+
+                result.add(currentToken);
+
+            } else if (currentToken instanceof OperatorToken) {
 
                 if (opStack.isEmpty()) {
-                    opStack.push(Parser.currentToken);
-                } else if (Parser.currentToken.getPrecedence() <= opStack.peek().getPrecedence() && opStack.peek() instanceof OperatorToken) {
-                    while (!opStack.empty() && opStack.peek() instanceof OperatorToken && Parser.currentToken.getPrecedence() <= opStack.peek().getPrecedence()) {
+                    opStack.push(currentToken);
+                } else if (currentToken.getPrecedence() <= opStack.peek().getPrecedence() && opStack.peek() instanceof OperatorToken) {
+                    while (!opStack.empty() && opStack.peek() instanceof OperatorToken && currentToken.getPrecedence() <= opStack.peek().getPrecedence()) {
                         result.add(opStack.pop());
                     }
-                    opStack.push(Parser.currentToken);
+                    opStack.push(currentToken);
                     result.get(0);
                 } else {
-                    opStack.push(Parser.currentToken);
+                    opStack.push(currentToken);
                 }
 
-            } else if (Parser.currentToken instanceof LBracketToken) {
+            } else if (currentToken instanceof LBracketToken) {
 
-                opStack.push(Parser.currentToken);
+                opStack.push(currentToken);
 
-            } else if (Parser.currentToken instanceof RBracketToken) {
+            } else if (currentToken instanceof RBracketToken) {
 
                 while (!(opStack.peek() instanceof LBracketToken)) {
                     result.add(opStack.pop());
@@ -50,8 +82,6 @@ public class Expression extends ABSElement {
                 }
 
             }
-
-            Parser.nextToken();
         }
 
         while (!opStack.empty()) {
@@ -62,7 +92,8 @@ public class Expression extends ABSElement {
     }
 
     public static Expression parse () {
-        ArrayList<Token> RPNExpression = generateRPNExpression();
+        ArrayList<Token> expression = isolateExpression();
+        ArrayList<Token> RPNExpression = generateRPNExpression(expression);
         if (RPNExpression.size() == 1) {
             return PrimaryExpression.parse(RPNExpression);
         } else if (!RPNExpression.isEmpty()) {
