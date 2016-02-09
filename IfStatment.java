@@ -12,16 +12,20 @@ public class IfStatment extends Statment {
         result.condition = Expression.parse();
         if (!(Parser.currentToken instanceof ThenToken)) {
             //Add Error
+            ErrorLog.logError(new Error(Parser.currentToken.getLineNumber(), "Expecting 'THEN'", "Inserting 'THEN'"));
+            Parser.moveToNext(new ThenToken(0));
         }
         Parser.nextToken();
         result.then = Statments.parse();
         if (!(Parser.currentToken instanceof ElseToken)) {
             //Add Error
+            ErrorLog.logError(new Error(Parser.currentToken.getLineNumber(), "Expecting 'ELSE'", "Inserting 'ELSE'"));
         }
         Parser.nextToken();
         result.or = Statments.parse();
         if (!(Parser.currentToken instanceof  EndIfToken)) {
             //Add Error
+            ErrorLog.logError(new Error(Parser.currentToken.getLineNumber(), "Expecting 'ENDIF'", "Inserting 'ENDIF'"));
         }
         Parser.nextToken();
         return result;

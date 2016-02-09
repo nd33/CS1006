@@ -24,14 +24,14 @@ public class Expression extends ABSElement {
                 if (i == expression.size() - 1) {
                     return true;
                 } else if (!(expression.get(i + 1) instanceof RBracketToken) && !(expression.get(i + 1) instanceof OperatorToken))  {
-                    ErrorLog.logError(new Error(expression.get(i + 1).getLineNumber(), "Expected and operator or ')'"));
+                    ErrorLog.logError(new Error(expression.get(i + 1).getLineNumber(), "Expected an operator or ')'"));
                     return false;
                 }
             } else if (expression.get(i) instanceof OperatorToken) {
                 if (i == expression.size() - 1) {
                     ErrorLog.logError(new Error(expression.get(i).getLineNumber(), "Expecting a number or identifier"));
                     return false;
-                } else if (expression.get(i + 1) instanceof OperatorToken) {
+                } else if (expression.get(i + 1) instanceof OperatorToken || expression.get(i + 1) instanceof RBracketToken) {
                     ErrorLog.logError(new Error(expression.get(i).getLineNumber(), "Expecting a number or identifier"));
                     return false;
                 }
@@ -95,6 +95,13 @@ public class Expression extends ABSElement {
 
     public static Expression parse () {
         ArrayList<Token> expression = isolateExpression();
+
+        if (!isLegalExpression(expression)) {
+            Expression e = new Expression();
+            e.setEmpty(true);
+            return e;
+        }
+
         ArrayList<Token> RPNExpression = generateRPNExpression(expression);
         if (RPNExpression.size() == 1) {
             return PrimaryExpression.parse(RPNExpression);
