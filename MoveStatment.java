@@ -18,7 +18,7 @@ public class MoveStatment extends Statment {
 
 
     public String codeString () {
-        return getArgument().codeString() + "/Arg exch def\n" + getMove() + "\n";
+        return getArgument().codeString() + " " + getMove() + "\n";
     }
 
     public String getMove() {

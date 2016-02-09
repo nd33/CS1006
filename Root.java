@@ -10,12 +10,16 @@ public class Root extends ABSElement {
     public static Root parse () {
         Root result = new Root();
         if (Parser.getCurrentToken() == null) {
+            result.setEmpty(true);
             return result;
         }
-        if(!(Parser.getCurrentToken() instanceof ProcedureToken)){
-            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(),
-                    "The program must start with a Procedure"));
-            Parser.nextToken();
+
+        if (!(Parser.currentToken instanceof ProcedureToken)) {
+            ErrorLog.logError(new Error(Parser.currentToken.getLineNumber(), "Program must start with a procedure"));
+            if (!Parser.moveToNext(new ProcedureToken(0))) {
+                result.setEmpty(true);
+                return result;
+            }
         }
 
         while (Parser.getCurrentToken() instanceof ProcedureToken) {

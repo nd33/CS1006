@@ -32,7 +32,7 @@ public class Procedure extends ABSElement {
     public String codeString () {
         Parser.setCurrProcArg(this.getArgument());
 
-        return "/" + getName() + "{\n" + getBody().codeString() + "} def\n";
+        return "/" + getName() + " {\n" + getBody().codeString() + "} def\n";
     }
 
     public String getName() {
