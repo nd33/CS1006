@@ -1,5 +1,4 @@
-dadada
-PROC LDRAGON ( LEVEL )
+	PROC LDRAGON ( LEVEL )
 	    IF LEVEL == 1 +
 		FORWARD  IF
 		THEN

@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Parser {
-    private static Token currentToken;
+    static Token currentToken;
     private static ArrayList<Token> input;
     private static String currProcArg;
 
