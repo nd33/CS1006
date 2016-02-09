@@ -2,15 +2,23 @@ public class LBracketToken extends Token {
     private static int numberOfLBrackets = 0;
 
     public static int getNumberOfRBrackets () {
-        return numberOfLBrackets;
+        return getNumberOfLBrackets();
     }
 
     public static void resetNumberOfRBrackets () {
-        numberOfLBrackets = 0;
+        setNumberOfLBrackets(0);
     }
 
     public LBracketToken (int lineNumber) {
         super(lineNumber);
-        numberOfLBrackets ++;
+        setNumberOfLBrackets(getNumberOfLBrackets() + 1);
+    }
+
+    public static int getNumberOfLBrackets() {
+        return numberOfLBrackets;
+    }
+
+    public static void setNumberOfLBrackets(int numberOfLBrackets) {
+        LBracketToken.numberOfLBrackets = numberOfLBrackets;
     }
 }

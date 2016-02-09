@@ -1,20 +1,20 @@
 import java.util.ArrayList;
 
 public class Root extends ABSElement {
-    ArrayList<Procedure> procs;
+    private ArrayList<Procedure> procs;
 
     public Root () {
-        procs = new ArrayList<Procedure>();
+        setProcs(new ArrayList<Procedure>());
     }
 
     public static Root parse () {
         Root result = new Root();
-        if (Parser.currentToken == null) {
+        if (Parser.getCurrentToken() == null) {
             return result;
         }
 
-        while (Parser.currentToken instanceof ProcedureToken) {
-            result.procs.add(Procedure.parse());
+        while (Parser.getCurrentToken() instanceof ProcedureToken) {
+            result.getProcs().add(Procedure.parse());
         }
 
         return result;
@@ -22,9 +22,17 @@ public class Root extends ABSElement {
 
     public String codeString () {
         String result = "";
-        for (Procedure p : procs) {
+        for (Procedure p : getProcs()) {
             result += p.codeString();
         }
         return result;
+    }
+
+    public ArrayList<Procedure> getProcs() {
+        return procs;
+    }
+
+    public void setProcs(ArrayList<Procedure> procs) {
+        this.procs = procs;
     }
 }

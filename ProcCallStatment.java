@@ -1,19 +1,19 @@
 
 public class ProcCallStatment extends Statment {
-    String procedure;
-    Expression argument;
+    private String procedure;
+    private Expression argument;
 
     public static ProcCallStatment parse () {
         ProcCallStatment result = new ProcCallStatment();
-        result.procedure = Parser.currentToken.getName();
+        result.setProcedure(Parser.getCurrentToken().getName());
         Parser.nextToken();
-        if (!(Parser.currentToken instanceof LBracketToken)) {
+        if (!(Parser.getCurrentToken() instanceof LBracketToken)) {
             //Add Error
         }
         //Parser.nextToken();
-        result.argument = Expression.parse();
+        result.setArgument(Expression.parse());
         Parser.previousToken();
-        if (!(Parser.currentToken instanceof RBracketToken)) {
+        if (!(Parser.getCurrentToken() instanceof RBracketToken)) {
             //Add Error
         }
         Parser.nextToken();
@@ -22,6 +22,22 @@ public class ProcCallStatment extends Statment {
     }
 
     public String codeString () {
-        return argument.codeString() + "/Arg exch def\n" + procedure + "\n";
+        return getArgument().codeString() + "/Arg exch def\n" + getProcedure() + "\n";
+    }
+
+    public String getProcedure() {
+        return procedure;
+    }
+
+    public void setProcedure(String procedure) {
+        this.procedure = procedure;
+    }
+
+    public Expression getArgument() {
+        return argument;
+    }
+
+    public void setArgument(Expression argument) {
+        this.argument = argument;
     }
 }

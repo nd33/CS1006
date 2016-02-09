@@ -2,36 +2,60 @@
  * Created by jm360 on 05/02/16.
  */
 public class IfStatment extends Statment {
-    Statments then;
-    Statments or;
-    Expression condition;
+    private Statments then;
+    private Statments or;
+    private Expression condition;
 
     public static IfStatment parse () {
         IfStatment result = new IfStatment();
         Parser.nextToken();
-        result.condition = Expression.parse();
-        if (!(Parser.currentToken instanceof ThenToken)) {
+        result.setCondition(Expression.parse());
+        if (!(Parser.getCurrentToken() instanceof ThenToken)) {
             //Add Error
-            ErrorLog.logError(new Error(Parser.currentToken.getLineNumber(), "Expecting 'THEN'", "Inserting 'THEN'"));
+            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting 'THEN'", "Inserting 'THEN'"));
             Parser.moveToNext(new ThenToken(0));
         }
         Parser.nextToken();
-        result.then = Statments.parse();
-        if (!(Parser.currentToken instanceof ElseToken)) {
+        result.setThen(Statments.parse());
+        if (!(Parser.getCurrentToken() instanceof ElseToken)) {
             //Add Error
-            ErrorLog.logError(new Error(Parser.currentToken.getLineNumber(), "Expecting 'ELSE'", "Inserting 'ELSE'"));
+            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting 'ELSE'", "Inserting 'ELSE'"));
         }
         Parser.nextToken();
-        result.or = Statments.parse();
-        if (!(Parser.currentToken instanceof  EndIfToken)) {
+        result.setOr(Statments.parse());
+        if (!(Parser.getCurrentToken() instanceof  EndIfToken)) {
             //Add Error
-            ErrorLog.logError(new Error(Parser.currentToken.getLineNumber(), "Expecting 'ENDIF'", "Inserting 'ENDIF'"));
+            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting 'ENDIF'", "Inserting 'ENDIF'"));
         }
         Parser.nextToken();
         return result;
     }
 
     public String codeString () {
-        return condition.codeString() + "{\n" + then.codeString() + "} {\n" + or.codeString() + "} ifelse \n";
+        return getCondition().codeString() + "{\n" + getThen().codeString() + "} {\n" + getOr().codeString() + "} ifelse \n";
+    }
+
+    public Statments getThen() {
+        return then;
+    }
+
+    public void setThen(Statments then) {
+        this.then = then;
+    }
+
+    public Statments getOr() {
+        return or;
+    }
+
+    public void setOr(Statments or) {
+        this.or = or;
+    }
+
+    public Expression getCondition() {
+        return condition;
+    }
+
+    public void setCondition(Expression condition) {
+        this.condition = condition;
     }
 }

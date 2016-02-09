@@ -5,29 +5,45 @@ public class ErrorLog {
     private static boolean containsErrors = false;
 
     public static void logError (Error toLog) {
-        if (errors == null) {
-            errors = new ArrayList<Error>();
+        if (getErrors() == null) {
+            setErrors(new ArrayList<Error>());
         }
-        errors.add(toLog);
-        containsErrors = true;
+        getErrors().add(toLog);
+        setContainsErrors(true);
     }
 
     public static void clear () {
-        errors.clear();
-        containsErrors = false;
+        getErrors().clear();
+        setContainsErrors(false);
     }
 
     public static boolean containsErrors () {
-        return containsErrors;
+        return isContainsErrors();
     }
 
     public static void displayErrors () {
-        if (errors == null) {
+        if (getErrors() == null) {
             return;
         }
 
-        for (Error e : errors) {
+        for (Error e : getErrors()) {
             System.out.println(e.toString());
         }
+    }
+
+    public static ArrayList<Error> getErrors() {
+        return errors;
+    }
+
+    public static void setErrors(ArrayList<Error> errors) {
+        ErrorLog.errors = errors;
+    }
+
+    public static boolean isContainsErrors() {
+        return containsErrors;
+    }
+
+    public static void setContainsErrors(boolean containsErrors) {
+        ErrorLog.containsErrors = containsErrors;
     }
 }

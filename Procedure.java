@@ -1,37 +1,61 @@
 
 public class Procedure extends ABSElement {
-    String name;
-    String argument;
-    Statments body;
+    private String name;
+    private String argument;
+    private Statments body;
 
     public static Procedure parse () {
         Procedure result = new Procedure();
         Parser.nextToken();
-        if (!(Parser.currentToken instanceof IdentifierToken)) {
+        if (!(Parser.getCurrentToken() instanceof IdentifierToken)) {
             //Add Error
         }
-        result.name = Parser.currentToken.getName();
+        result.setName(Parser.getCurrentToken().getName());
         Parser.nextToken();
-        if (!(Parser.currentToken instanceof LBracketToken)) {
-            //Add Error
-        }
-        Parser.nextToken();
-        if (!(Parser.currentToken instanceof IdentifierToken)) {
-            //Add Error
-        }
-        result.argument = Parser.currentToken.getName();
-        Parser.nextToken();
-        if (!(Parser.currentToken instanceof RBracketToken)) {
+        if (!(Parser.getCurrentToken() instanceof LBracketToken)) {
             //Add Error
         }
         Parser.nextToken();
-        result.body = Statments.parse();
+        if (!(Parser.getCurrentToken() instanceof IdentifierToken)) {
+            //Add Error
+        }
+        result.setArgument(Parser.getCurrentToken().getName());
+        Parser.nextToken();
+        if (!(Parser.getCurrentToken() instanceof RBracketToken)) {
+            //Add Error
+        }
+        Parser.nextToken();
+        result.setBody(Statments.parse());
         return result;
     }
 
     public String codeString () {
-        Parser.currProcArg = this.argument;
+        Parser.setCurrProcArg(this.getArgument());
 
-        return "/" + name + "{\n" + body.codeString() + "} def\n";
+        return "/" + getName() + "{\n" + getBody().codeString() + "} def\n";
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getArgument() {
+        return argument;
+    }
+
+    public void setArgument(String argument) {
+        this.argument = argument;
+    }
+
+    public Statments getBody() {
+        return body;
+    }
+
+    public void setBody(Statments body) {
+        this.body = body;
     }
 }

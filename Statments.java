@@ -2,25 +2,33 @@ import java.util.ArrayList;
 
 
 public class Statments extends ABSElement {
-    ArrayList<Statment> statments;
+    private ArrayList<Statment> statments;
 
     public Statments () {
-        statments = new ArrayList<Statment>();
+        setStatments(new ArrayList<Statment>());
     }
 
     public static Statments parse () {
         Statments result = new Statments();
-        while (Parser.currentToken instanceof MoveToken || Parser.currentToken instanceof IfToken || Parser.currentToken instanceof IdentifierToken) {
-            result.statments.add(Statment.parse());
+        while (Parser.getCurrentToken() instanceof MoveToken || Parser.getCurrentToken() instanceof IfToken || Parser.getCurrentToken() instanceof IdentifierToken) {
+            result.getStatments().add(Statment.parse());
         }
         return result;
     }
 
     public String codeString () {
         String result = "";
-        for (Statment s : statments) {
+        for (Statment s : getStatments()) {
             result += s.codeString();
         }
         return result;
+    }
+
+    public ArrayList<Statment> getStatments() {
+        return statments;
+    }
+
+    public void setStatments(ArrayList<Statment> statments) {
+        this.statments = statments;
     }
 }

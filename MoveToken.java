@@ -1,13 +1,17 @@
 public class MoveToken extends Token {
-    String name;
+    private String name;
     
     public MoveToken (String move, int lineNumber)
     {
         super(lineNumber);
-        this.name = move;
+        this.setName(move);
     }
     
     @Override public String getName () {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
