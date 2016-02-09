@@ -1,14 +1,14 @@
 
-public class Statment extends ABSElement {
-    public static Statment parse () {
-        Statment result = new Statment();
+public class Statement extends ABSElement {
+    public static Statement parse () {
+        Statement result = new Statement();
         if (Parser.getCurrentToken() instanceof MoveToken) {
-            result = MoveStatment.parse();
+            result = MoveStatement.parse();
             Parser.nextToken();
         } else if (Parser.getCurrentToken() instanceof IfToken) {
-            result = IfStatment.parse();
+            result = IfStatement.parse();
         } else if (Parser.getCurrentToken() instanceof IdentifierToken) {
-            result = ProcCallStatment.parse();
+            result = ProcCallStatement.parse();
             Parser.nextToken();
         } else {
             //Add Error

@@ -2,7 +2,7 @@
 public class Procedure extends ABSElement {
     private String name;
     private String argument;
-    private Statments body;
+    private Statements body;
 
     public static Procedure parse () {
         Procedure result = new Procedure();
@@ -25,7 +25,7 @@ public class Procedure extends ABSElement {
             //Add Error
         }
         Parser.nextToken();
-        result.setBody(Statments.parse());
+        result.setBody(Statements.parse());
         return result;
     }
 
@@ -51,11 +51,11 @@ public class Procedure extends ABSElement {
         this.argument = argument;
     }
 
-    public Statments getBody() {
+    public Statements getBody() {
         return body;
     }
 
-    public void setBody(Statments body) {
+    public void setBody(Statements body) {
         this.body = body;
     }
 }

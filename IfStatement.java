@@ -1,11 +1,11 @@
 
-public class IfStatment extends Statment {
-    private Statments then;
-    private Statments or;
+public class IfStatement extends Statement {
+    private Statements then;
+    private Statements or;
     private Expression condition;
 
-    public static IfStatment parse () {
-        IfStatment result = new IfStatment();
+    public static IfStatement parse () {
+        IfStatement result = new IfStatement();
         Parser.nextToken();
         result.setCondition(Expression.parse());
         if (!(Parser.getCurrentToken() instanceof ThenToken)) {
@@ -14,13 +14,13 @@ public class IfStatment extends Statment {
             Parser.moveToNext(new ThenToken(0));
         }
         Parser.nextToken();
-        result.setThen(Statments.parse());
+        result.setThen(Statements.parse());
         if (!(Parser.getCurrentToken() instanceof ElseToken)) {
             //Add Error
             ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting 'ELSE'", "Inserting 'ELSE'"));
         }
         Parser.nextToken();
-        result.setOr(Statments.parse());
+        result.setOr(Statements.parse());
         if (!(Parser.getCurrentToken() instanceof  EndIfToken)) {
             //Add Error
             ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting 'ENDIF'", "Inserting 'ENDIF'"));
@@ -33,19 +33,19 @@ public class IfStatment extends Statment {
         return getCondition().codeString() + "{\n" + getThen().codeString() + "} {\n" + getOr().codeString() + "} ifelse \n";
     }
 
-    public Statments getThen() {
+    public Statements getThen() {
         return then;
     }
 
-    public void setThen(Statments then) {
+    public void setThen(Statements then) {
         this.then = then;
     }
 
-    public Statments getOr() {
+    public Statements getOr() {
         return or;
     }
 
-    public void setOr(Statments or) {
+    public void setOr(Statements or) {
         this.or = or;
     }
 

@@ -1,10 +1,10 @@
 
-public class ProcCallStatment extends Statment {
+public class ProcCallStatement extends Statement {
     private String procedure;
     private Expression argument;
 
-    public static ProcCallStatment parse () {
-        ProcCallStatment result = new ProcCallStatment();
+    public static ProcCallStatement parse () {
+        ProcCallStatement result = new ProcCallStatement();
         result.setProcedure(Parser.getCurrentToken().getName());
         Parser.nextToken();
         if (!(Parser.getCurrentToken() instanceof LBracketToken)) {

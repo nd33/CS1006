@@ -43,9 +43,9 @@ public class Parser {
             } else if (Parser.getCurrentToken() instanceof EOIToken) {
                 return false;
             } else if (Parser.getCurrentToken() instanceof MoveToken) {
-                MoveStatment.parse();
+                MoveStatement.parse();
             } else if (Parser.getCurrentToken() instanceof IfToken) {
-                IfStatment.parse();
+                IfStatement.parse();
             } else if (Parser.getCurrentToken() instanceof ProcedureToken) {
                 return false;
             }

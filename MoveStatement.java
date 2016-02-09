@@ -1,11 +1,11 @@
 
 
-public class MoveStatment extends Statment {
+public class MoveStatement extends Statement {
     private String move;
     private Expression argument;
 
-    public static MoveStatment parse () {
-        MoveStatment result = new MoveStatment();
+    public static MoveStatement parse () {
+        MoveStatement result = new MoveStatement();
         result.setMove(Parser.getCurrentToken().getName());
         Parser.nextToken();
         if (!(Parser.getCurrentToken() instanceof NumberToken) && !(Parser.getCurrentToken() instanceof IdentifierToken) && !(Parser.getCurrentToken() instanceof LBracketToken)) {
