@@ -7,11 +7,11 @@ public class CodeGenerator {
             "/Ypos    { 500 } def\n" +
             "/Heading { 0   } def\n" +
             "/Arg     { 0   } def\n" +
-            "/Right   {\n" +
+            "/RIGHT   {\n" +
             "Heading exch add Trueheading\n" +
             "/Heading exch def\n" +
             "} def\n" +
-            "/Left {\n" +
+            "/LEFT {\n" +
             "Heading exch sub Trueheading\n" +
             "/Heading exch def\n" +
             "} def\n" +
@@ -19,7 +19,7 @@ public class CodeGenerator {
             "360 mod dup\n" +
             "0 lt { 360 add } if\n" +
             "} def\n" +
-            "/Forward {\n" +
+            "/FORWARD {\n" +
             "dup  Heading sin mul\n" +
             "exch Heading cos mul\n" +
             "2 copy Newposition\n" +

@@ -70,7 +70,7 @@ public class BinaryExpression extends Expression {
         String result = "";
         result += getLeft().codeString();
         result += getRight().codeString();
-        result += opToPostScriptCode(getOperator()) + "\n";
+        result += opToPostScriptCode(getOperator()) + " ";
         return result;
     }
 

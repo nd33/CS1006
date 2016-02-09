@@ -22,12 +22,12 @@ public class PrimaryExpression extends Expression {
 
     public String codeString () {
         if (isNumber()) {
-            return getValue() + "\n";
+            return getValue() + " ";
         }else if(this.getName().equals(Parser.getCurrProcArg())){
-            return "Arg" + "\n";
+            return "Arg " ;
         }
         else{
-            return getName() + "\n";
+            return getName() + " ";
         }
     }
 

@@ -19,7 +19,7 @@ public class Main {
             ErrorLog.displayErrors();
             return;
         } else {
-            FileManager.writeStringToFile(CodeGenerator.generateCodeText(program), fileName.replace(".t", ".txt"));
+            FileManager.writeStringToFile(CodeGenerator.generateCodeText(program), fileName.replace(".t", ".ps"));
         }
 
        //FileManager.writeStringToFile(CodeGenerator.generateCodeText(Parser.parse(Lexer.tokenise(FileManager.contentsOfFile("dragon.t")))), "dragon.txt");
