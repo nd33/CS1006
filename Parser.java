@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Parser {
-    static Token currentToken;
+    private static Token currentToken;
     private static ArrayList<Token> input;
     private static String currProcArg;
 
@@ -37,16 +37,16 @@ public class Parser {
     }
 
     public static boolean moveToNextWithinIf (Token token) {
-        while (!(Parser.currentToken instanceof EndIfToken)) {
-            if (Parser.currentToken.getClass() == token.getClass()) {
+        while (!(Parser.getCurrentToken() instanceof EndIfToken)) {
+            if (Parser.getCurrentToken().getClass() == token.getClass()) {
                 return true;
-            } else if (Parser.currentToken instanceof EOIToken) {
+            } else if (Parser.getCurrentToken() instanceof EOIToken) {
                 return false;
-            } else if (Parser.currentToken instanceof MoveToken) {
+            } else if (Parser.getCurrentToken() instanceof MoveToken) {
                 MoveStatment.parse();
-            } else if (Parser.currentToken instanceof IfToken) {
+            } else if (Parser.getCurrentToken() instanceof IfToken) {
                 IfStatment.parse();
-            } else if (Parser.currentToken instanceof ProcedureToken) {
+            } else if (Parser.getCurrentToken() instanceof ProcedureToken) {
                 return false;
             }
             Parser.nextToken();

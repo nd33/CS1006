@@ -14,8 +14,8 @@ public class Root extends ABSElement {
             return result;
         }
 
-        if (!(Parser.currentToken instanceof ProcedureToken)) {
-            ErrorLog.logError(new Error(Parser.currentToken.getLineNumber(), "Program must start with a procedure"));
+        if (!(Parser.getCurrentToken() instanceof ProcedureToken)) {
+            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Program must start with a procedure"));
             if (!Parser.moveToNext(new ProcedureToken(0))) {
                 result.setEmpty(true);
                 return result;
