@@ -26,7 +26,7 @@ public class Error {
         }
         result += problem;
         if (potentialSolution != null) {
-            result += " Try : " + potentialSolution;
+            result += ", Try : " + potentialSolution;
         }
         return result;
     }

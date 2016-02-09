@@ -1,8 +1,8 @@
-
-
 	PROC LDRAGON ( LEVEL )
-	    IF LEVEL == 1 + THEN
+	    IF LEVEL == 1 +
 		FORWARD  IF
+		THEN
+		FORWARD 5
 	    ELSE
 		LDRAGON ( LEVEL + 1 1)
 		LEFT 90

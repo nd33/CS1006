@@ -36,6 +36,25 @@ public class Parser {
         return false;
     }
 
+    public static boolean moveToNextWithinIf (Token token) {
+        while (!(Parser.currentToken instanceof EndIfToken)) {
+            if (Parser.currentToken.getClass() == token.getClass()) {
+                return true;
+            } else if (Parser.currentToken instanceof EOIToken) {
+                return false;
+            } else if (Parser.currentToken instanceof MoveToken) {
+                MoveStatment.parse();
+            } else if (Parser.currentToken instanceof IfToken) {
+                IfStatment.parse();
+            } else if (Parser.currentToken instanceof ProcedureToken) {
+                return false;
+            }
+            Parser.nextToken();
+        }
+
+        return false;
+    }
+
     public static Root parse (ArrayList<Token> input) {
         Root program = new Root();
         Parser.input = input;
