@@ -13,38 +13,19 @@ public class IfStatment extends Statment {
         if (!(Parser.currentToken instanceof ThenToken)) {
             //Add Error
             ErrorLog.logError(new Error(Parser.currentToken.getLineNumber(), "Expecting 'THEN'", "Inserting 'THEN'"));
-            if (!Parser.moveToNextWithinIf(new ThenToken(0))) {
-                //There is no then to continue parsing from
-                IfStatment e = new IfStatment();
-                e.setEmpty(true);
-                return e;
-            }
+            Parser.moveToNext(new ThenToken(0));
         }
         Parser.nextToken();
         result.then = Statments.parse();
         if (!(Parser.currentToken instanceof ElseToken)) {
             //Add Error
             ErrorLog.logError(new Error(Parser.currentToken.getLineNumber(), "Expecting 'ELSE'", "Inserting 'ELSE'"));
-
-            if (!Parser.moveToNextWithinIf(new ElseToken(0))) {
-                //There is no else to continue parsing from
-                IfStatment e = new IfStatment();
-                e.setEmpty(true);
-                return e;
-            }
         }
         Parser.nextToken();
         result.or = Statments.parse();
         if (!(Parser.currentToken instanceof  EndIfToken)) {
             //Add Error
             ErrorLog.logError(new Error(Parser.currentToken.getLineNumber(), "Expecting 'ENDIF'", "Inserting 'ENDIF'"));
-
-            if (!Parser.moveToNextWithinIf(new EndIfToken(0))) {
-                //There is no then to continue parsing from
-                IfStatment e = new IfStatment();
-                e.setEmpty(true);
-                return e;
-            }
         }
         Parser.nextToken();
         return result;

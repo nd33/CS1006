@@ -3,10 +3,14 @@ public class IdentifierToken extends Token {
 
     public IdentifierToken (String name, int lineNumber) {
         super(lineNumber);
-        this.name = name;
+        this.setName(name);
     }
 
     @Override public String getName () {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

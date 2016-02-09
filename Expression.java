@@ -6,11 +6,11 @@ public class Expression extends ABSElement {
     public static ArrayList isolateExpression () {
         ArrayList<Token> result = new ArrayList<Token>();
 
-        while (Parser.currentToken instanceof NumberToken || Parser.currentToken instanceof IdentifierToken ||
-                Parser.currentToken instanceof OperatorToken || Parser.currentToken instanceof LBracketToken ||
-                Parser.currentToken instanceof RBracketToken) {
+        while (Parser.getCurrentToken() instanceof NumberToken || Parser.getCurrentToken() instanceof IdentifierToken ||
+                Parser.getCurrentToken() instanceof OperatorToken || Parser.getCurrentToken() instanceof LBracketToken ||
+                Parser.getCurrentToken() instanceof RBracketToken) {
 
-            result.add(Parser.currentToken);
+            result.add(Parser.getCurrentToken());
             Parser.nextToken();
         }
 

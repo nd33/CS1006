@@ -1,18 +1,18 @@
 import java.util.ArrayList;
 
 public class PrimaryExpression extends Expression {
-    int value;
-    boolean isNumber;
-    String name;
+    private int value;
+    private boolean isNumber;
+    private String name;
 
     public static PrimaryExpression parse (ArrayList<Token> RPNExpression) {
         PrimaryExpression result = new PrimaryExpression();
         if (RPNExpression.get(0) instanceof NumberToken) {
-            result.value = RPNExpression.get(0).getValue();
-            result.isNumber = true;
+            result.setValue(RPNExpression.get(0).getValue());
+            result.setNumber(true);
         } else if (RPNExpression.get(0) instanceof IdentifierToken) {
-            result.name = RPNExpression.get(0).getName();
-            result.isNumber = false;
+            result.setName(RPNExpression.get(0).getName());
+            result.setNumber(false);
         } else {
             //Add Errors
         }
@@ -21,13 +21,37 @@ public class PrimaryExpression extends Expression {
     }
 
     public String codeString () {
-        if (isNumber) {
-            return value + "\n";
-        }else if(this.name.equals(Parser.currProcArg)){
+        if (isNumber()) {
+            return getValue() + "\n";
+        }else if(this.getName().equals(Parser.getCurrProcArg())){
             return "Arg" + "\n";
         }
         else{
-            return name + "\n";
+            return getName() + "\n";
         }
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public boolean isNumber() {
+        return isNumber;
+    }
+
+    public void setNumber(boolean number) {
+        isNumber = number;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

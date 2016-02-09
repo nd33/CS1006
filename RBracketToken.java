@@ -6,12 +6,16 @@ public class RBracketToken extends Token {
     }
 
     public static void resetNumberOfRBrackets () {
-        numberOfRBrackets = 0;
+        setNumberOfRBrackets(0);
     }
 
     public RBracketToken (int lineNumber)
     {
         super(lineNumber);
-        numberOfRBrackets ++;
+        setNumberOfRBrackets(getNumberOfRBrackets() + 1);
+    }
+
+    public static void setNumberOfRBrackets(int numberOfRBrackets) {
+        RBracketToken.numberOfRBrackets = numberOfRBrackets;
     }
 }

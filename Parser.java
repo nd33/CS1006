@@ -1,34 +1,34 @@
 import java.util.ArrayList;
 
 public class Parser {
-    public static Token currentToken;
-    static ArrayList<Token> input;
-    public static String currProcArg;
+    private static Token currentToken;
+    private static ArrayList<Token> input;
+    private static String currProcArg;
 
     public static void nextToken () {
-        if (currentToken == null) {
+        if (getCurrentToken() == null) {
             return;
-        } else if (input == null) {
+        } else if (getInput() == null) {
             return;
-        } else if (input.lastIndexOf(currentToken) != input.size() - 1) {
-            currentToken = input.get(input.indexOf(currentToken) + 1);
+        } else if (getInput().lastIndexOf(getCurrentToken()) != getInput().size() - 1) {
+            setCurrentToken(getInput().get(getInput().indexOf(getCurrentToken()) + 1));
         }
     }
 
     public static void previousToken () {
-        if (currentToken == null) {
+        if (getCurrentToken() == null) {
             return;
-        } else if (input == null) {
+        } else if (getInput() == null) {
             return;
-        } else if (input.lastIndexOf(currentToken) != 0) {
-            currentToken = input.get(input.indexOf(currentToken) - 1);
+        } else if (getInput().lastIndexOf(getCurrentToken()) != 0) {
+            setCurrentToken(getInput().get(getInput().indexOf(getCurrentToken()) - 1));
         }
     }
 
     public static boolean moveToNext (Token token) {
-        for (int i = input.indexOf(currentToken) + 1; i < input.size(); i ++) {
-            if (input.get(i).getClass() == token.getClass()) {
-                currentToken = input.get(i);
+        for (int i = getInput().indexOf(getCurrentToken()) + 1; i < getInput().size(); i ++) {
+            if (getInput().get(i).getClass() == token.getClass()) {
+                setCurrentToken(getInput().get(i));
                 return true;
             }
         }
@@ -57,14 +57,38 @@ public class Parser {
 
     public static Root parse (ArrayList<Token> input) {
         Root program = new Root();
-        Parser.input = input;
+        Parser.setInput(input);
         if (input.size() > 0) {
-            currentToken = input.get(0);
+            setCurrentToken(input.get(0));
         }
-        while (Parser.currentToken instanceof ProcedureToken) {
+        while (Parser.getCurrentToken() instanceof ProcedureToken) {
 
-            program.procs.add(Procedure.parse());
+            program.getProcs().add(Procedure.parse());
         }
         return program;
+    }
+
+    public static Token getCurrentToken() {
+        return currentToken;
+    }
+
+    public static void setCurrentToken(Token currentToken) {
+        Parser.currentToken = currentToken;
+    }
+
+    public static ArrayList<Token> getInput() {
+        return input;
+    }
+
+    public static void setInput(ArrayList<Token> input) {
+        Parser.input = input;
+    }
+
+    public static String getCurrProcArg() {
+        return currProcArg;
+    }
+
+    public static void setCurrProcArg(String currProcArg) {
+        Parser.currProcArg = currProcArg;
     }
 }

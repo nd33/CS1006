@@ -2,9 +2,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class BinaryExpression extends Expression {
-    Expression left;
-    Expression right;
-    String operator;
+    private Expression left;
+    private Expression right;
+    private String operator;
 
     private static Expression generateTree (ArrayList<Token> expression) {
         Expression tree;
@@ -13,20 +13,20 @@ public class BinaryExpression extends Expression {
             tree = new Expression();
         } else if (expression.get(0) instanceof NumberToken) {
             tree = new PrimaryExpression();
-            ((PrimaryExpression) tree).isNumber = true;
-            ((PrimaryExpression) tree).value = expression.get(0).getValue();
+            ((PrimaryExpression) tree).setNumber(true);
+            ((PrimaryExpression) tree).setValue(expression.get(0).getValue());
             expression.remove(0);
         } else if (expression.get(0) instanceof IdentifierToken) {
             tree = new PrimaryExpression();
-            ((PrimaryExpression) tree).isNumber = false;
-            ((PrimaryExpression) tree).name = expression.get(0).getName();
+            ((PrimaryExpression) tree).setNumber(false);
+            ((PrimaryExpression) tree).setName(expression.get(0).getName());
             expression.remove(0);
         } else if (expression.get(0) instanceof OperatorToken) {
             tree = new BinaryExpression();
-            ((BinaryExpression) tree).operator = expression.get(0).getName();
+            ((BinaryExpression) tree).setOperator(expression.get(0).getName());
             expression.remove(0);
-            ((BinaryExpression) tree).right = generateTree(expression);
-            ((BinaryExpression) tree).left = generateTree(expression);
+            ((BinaryExpression) tree).setRight(generateTree(expression));
+            ((BinaryExpression) tree).setLeft(generateTree(expression));
             tree.codeString();
         } else {
             tree = new Expression();
@@ -68,10 +68,33 @@ public class BinaryExpression extends Expression {
 
     public String codeString () {
         String result = "";
-        result += left.codeString();
-        result += right.codeString();
-        result += opToPostScriptCode(operator) + "\n";
+        result += getLeft().codeString();
+        result += getRight().codeString();
+        result += opToPostScriptCode(getOperator()) + "\n";
         return result;
     }
 
+    public Expression getLeft() {
+        return left;
+    }
+
+    public void setLeft(Expression left) {
+        this.left = left;
+    }
+
+    public Expression getRight() {
+        return right;
+    }
+
+    public void setRight(Expression right) {
+        this.right = right;
+    }
+
+    public String getOperator() {
+        return operator;
+    }
+
+    public void setOperator(String operator) {
+        this.operator = operator;
+    }
 }

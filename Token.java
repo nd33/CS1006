@@ -1,9 +1,8 @@
 public abstract class Token {
-    protected int lineNumber;
-    boolean legal;
+    private int lineNumber;
 
     public Token (int lineNumber) {
-        this.lineNumber = lineNumber;
+        this.setLineNumber(lineNumber);
     }
 
     public int getLineNumber () {
@@ -22,5 +21,9 @@ public abstract class Token {
     public String getName () {
         //Override for identifier
         return "";
+    }
+
+    public void setLineNumber(int lineNumber) {
+        this.lineNumber = lineNumber;
     }
 }

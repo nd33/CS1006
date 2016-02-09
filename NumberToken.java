@@ -4,10 +4,14 @@ public class NumberToken extends Token {
     public NumberToken (int value, int lineNumber)
     {
         super(lineNumber);
-        this.value = value;
+        this.setValue(value);
     }
 
     @Override public int getValue () {
         return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
     }
 }

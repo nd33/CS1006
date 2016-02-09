@@ -1,23 +1,39 @@
 
 
 public class MoveStatment extends Statment {
-    String move;
-    Expression argument;
+    private String move;
+    private Expression argument;
 
     public static MoveStatment parse () {
         MoveStatment result = new MoveStatment();
-        result.move = Parser.currentToken.getName();
+        result.setMove(Parser.getCurrentToken().getName());
         Parser.nextToken();
-        if (!(Parser.currentToken instanceof NumberToken) && !(Parser.currentToken instanceof IdentifierToken) && !(Parser.currentToken instanceof LBracketToken)) {
+        if (!(Parser.getCurrentToken() instanceof NumberToken) && !(Parser.getCurrentToken() instanceof IdentifierToken) && !(Parser.getCurrentToken() instanceof LBracketToken)) {
             //Add Error
-            ErrorLog.logError(new Error(Parser.currentToken.getLineNumber(), "Expecting expression after " + result.move));
+            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting expression after " + result.getMove()));
         }
-        result.argument = Expression.parse();
+        result.setArgument(Expression.parse());
         return result;
     }
 
 
     public String codeString () {
-        return argument.codeString() + "/Arg exch def\n" + move + "\n";
+        return getArgument().codeString() + "/Arg exch def\n" + getMove() + "\n";
+    }
+
+    public String getMove() {
+        return move;
+    }
+
+    public void setMove(String move) {
+        this.move = move;
+    }
+
+    public Expression getArgument() {
+        return argument;
+    }
+
+    public void setArgument(Expression argument) {
+        this.argument = argument;
     }
 }

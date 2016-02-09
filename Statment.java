@@ -2,12 +2,12 @@
 public class Statment extends ABSElement {
     public static Statment parse () {
         Statment result = new Statment();
-        if (Parser.currentToken instanceof MoveToken) {
+        if (Parser.getCurrentToken() instanceof MoveToken) {
             result = MoveStatment.parse();
             Parser.nextToken();
-        } else if (Parser.currentToken instanceof IfToken) {
+        } else if (Parser.getCurrentToken() instanceof IfToken) {
             result = IfStatment.parse();
-        } else if (Parser.currentToken instanceof IdentifierToken) {
+        } else if (Parser.getCurrentToken() instanceof IdentifierToken) {
             result = ProcCallStatment.parse();
             Parser.nextToken();
         } else {
