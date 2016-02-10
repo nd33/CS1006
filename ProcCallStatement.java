@@ -8,13 +8,15 @@ public class ProcCallStatement extends Statement {
         result.setProcedure(Parser.getCurrentToken().getName());
         Parser.nextToken();
         if (!(Parser.getCurrentToken() instanceof LBracketToken)) {
-            //Add Error
+            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(),
+                    "A '(' must follow the name of the procedure when you call it"));
         }
         //Parser.nextToken();
         result.setArgument(Expression.parse());
         Parser.previousToken();
         if (!(Parser.getCurrentToken() instanceof RBracketToken)) {
-            //Add Error
+            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(),
+                    "A ')' must follow the argument of the procedure when you call it"));
         }
         Parser.nextToken();
         //Parser.nextToken();
