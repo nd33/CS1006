@@ -14,7 +14,8 @@ public class PrimaryExpression extends Expression {
             result.setName(RPNExpression.get(0).getName());
             result.setNumber(false);
         } else {
-            //Add Errors
+            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(),
+                    "A primary expression should start with a number or an identifier !"));
         }
         //Parser.nextToken();
         return result;

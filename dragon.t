@@ -14,6 +14,6 @@ PROC TRIANGLE ( SIZE )
 	     ENDIF
 
 	PROC MAIN( VOID )
-	TRIANGLE fdfds 250 ds3
+	TRIANGLE ( 250 )
 
 

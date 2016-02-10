@@ -9,7 +9,6 @@ public class BinaryExpression extends Expression {
     private static Expression generateTree (ArrayList<Token> expression) {
         Expression tree;
         if (expression.size() == 1 && !(expression.get(0) instanceof IdentifierToken || expression.get(0) instanceof NumberToken)) {
-            //Add Error
             tree = new Expression();
         } else if (expression.get(0) instanceof NumberToken) {
             tree = new PrimaryExpression();
