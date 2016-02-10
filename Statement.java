@@ -11,7 +11,8 @@ public class Statement extends ABSElement {
             result = ProcCallStatement.parse();
             Parser.nextToken();
         } else {
-            //Add Error
+            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(),
+                    "A statement must start with a move token, if token or an identifier token"));
         }
         return result;
     }

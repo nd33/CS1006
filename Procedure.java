@@ -8,21 +8,21 @@ public class Procedure extends ABSElement {
         Procedure result = new Procedure();
         Parser.nextToken();
         if (!(Parser.getCurrentToken() instanceof IdentifierToken)) {
-            //Add Error
+            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "A procedure must start with an identifier"));
         }
         result.setName(Parser.getCurrentToken().getName());
         Parser.nextToken();
         if (!(Parser.getCurrentToken() instanceof LBracketToken)) {
-            //Add Error
+            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "A '(' must follow the name of the procedure"));
         }
         Parser.nextToken();
         if (!(Parser.getCurrentToken() instanceof IdentifierToken)) {
-            //Add Error
+            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "An identifier must be the argument of the procedure"));
         }
         result.setArgument(Parser.getCurrentToken().getName());
         Parser.nextToken();
         if (!(Parser.getCurrentToken() instanceof RBracketToken)) {
-            //Add Error
+            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "A ')' must follow the argument of the procedure"));
         }
         Parser.nextToken();
         result.setBody(Statements.parse());
