@@ -24,7 +24,7 @@ public class ProcCallStatement extends Statement {
     }
 
     public String codeString () {
-        return getArgument().codeString() + " /Arg exch def " + getProcedure() + "\n";
+        return "Arg " + getArgument().codeString() + " /Arg exch def " + getProcedure() + " /Arg exch def " + "\n";
     }
 
     public String getProcedure() {

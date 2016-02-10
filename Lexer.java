@@ -74,28 +74,50 @@ public class Lexer {
 
         for (String currentWord : words) {
             if (currentWord.equals("FORWARD") || currentWord.equals("LEFT") || currentWord.equals("RIGHT")) {
+                if (statment) {
+                    result.add(new EOSToken(currentLine));
+                } else {
+                    statment = true;
+                }
                 result.add(new MoveToken(currentWord, currentLine));
-                statment = true;
             } else if (currentWord.equals("+") || currentWord.equals("-") || currentWord.equals("/") || currentWord.equals("*")
                     || currentWord.equals("==") || currentWord.equals("!=") || currentWord.equals("<=") || currentWord.equals(">=")
                     || currentWord.equals("<") || currentWord.equals(">")) {
                 result.add(new OperatorToken(currentWord, currentLine));
             }else if (currentWord.equals("(")) {
-                result.add(new LBracketToken(currentLine));
                 if (previousToken instanceof IdentifierToken && !proc) {
-                    statment = true;
+                    result.set(result.size() - 1, new MethodCallToken(currentLine, previousToken.getName()));
+                    if (statment) {
+                        result.add(result.size() - 1, new EOSToken(currentLine));
+                    } else {
+                        statment = true;
+                    }
                 } else {
                     proc = false;
                 }
+                result.add(new LBracketToken(currentLine));
             } else if (currentWord.equals(")")) {
                 result.add(new RBracketToken(currentLine));
             } else if (currentWord.equals("IF")) {
+                if (statment) {
+                    result.add(new EOSToken(currentLine));
+                } else {
+
+                }
                 result.add(new IfToken(currentLine));
             } else if (currentWord.equals("THEN")) {
                 result.add(new ThenToken(currentLine));
             } else if (currentWord.equals("ELSE")) {
+                if (statment) {
+                    result.add(new EOSToken(currentLine));
+                    statment = false;
+                }
                 result.add(new ElseToken(currentLine));
             } else if (currentWord.equals("ENDIF")) {
+                if (statment) {
+                    result.add(new EOSToken(currentLine));
+                    statment = false;
+                }
                 result.add(new EndIfToken(currentLine));
             } else if (currentWord.equals("PROC")) {
                 result.add(new ProcedureToken(currentLine));
@@ -109,10 +131,6 @@ public class Lexer {
                     result.add(new NumberToken(0, currentLine));
                 }
             } else if (currentWord.equals("\n")) {
-                if (statment) {
-                    result.add(new EOSToken(currentLine));
-                    statment = false;
-                }
                 currentLine ++;
             } else {
                 result.add(new IdentifierToken(currentWord, currentLine));

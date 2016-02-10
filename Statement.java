@@ -7,7 +7,7 @@ public class Statement extends ABSElement {
             Parser.nextToken();
         } else if (Parser.getCurrentToken() instanceof IfToken) {
             result = IfStatement.parse();
-        } else if (Parser.getCurrentToken() instanceof IdentifierToken) {
+        } else if (Parser.getCurrentToken() instanceof MethodCallToken) {
             result = ProcCallStatement.parse();
             Parser.nextToken();
         } else {

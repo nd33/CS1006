@@ -10,7 +10,7 @@ public class Statements extends ABSElement {
 
     public static Statements parse () {
         Statements result = new Statements();
-        while (Parser.getCurrentToken() instanceof MoveToken || Parser.getCurrentToken() instanceof IfToken || Parser.getCurrentToken() instanceof IdentifierToken) {
+        while (Parser.getCurrentToken() instanceof MoveToken || Parser.getCurrentToken() instanceof IfToken || Parser.getCurrentToken() instanceof MethodCallToken) {
             result.getStatements().add(Statement.parse());
         }
         return result;
