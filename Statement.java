@@ -12,7 +12,7 @@ public class Statement extends ABSElement {
             Parser.nextToken();
         } else {
             ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(),
-                    "A statement must start with a move token, if token or an identifier token"));
+                    "A statement must start with a move token, an if token or an identifier token"));
         }
         return result;
     }

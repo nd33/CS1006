@@ -26,6 +26,23 @@ public class Root extends ABSElement {
             result.getProcs().add(Procedure.parse());
         }
 
+        boolean mainPresent = false;
+        ArrayList<String> procNames = new ArrayList<String>();
+
+        for (Procedure p : result.getProcs()) {
+            if (p.getName().equals("MAIN")) {
+                mainPresent = true;
+            }
+            if (procNames.contains(p.getName())) {
+                ErrorLog.logError(new Error("Redefinition of procedure " + p.getName()));
+            }
+            procNames.add(p.getName());
+        }
+
+        if (!mainPresent) {
+            ErrorLog.logError(new Error("Program must contain a 'MAIN' procedure"));
+        }
+
         return result;
     }
 

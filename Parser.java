@@ -26,11 +26,15 @@ public class Parser {
     }
 
     public static boolean moveToNext (Token token) {
-        for (int i = getInput().indexOf(getCurrentToken()) + 1; i < getInput().size(); i ++) {
-            if (getInput().get(i).getClass() == token.getClass()) {
-                setCurrentToken(getInput().get(i));
+        while (!(Parser.getCurrentToken() instanceof EOIToken)) {
+            if (Parser.getCurrentToken().getClass() == token.getClass()) {
                 return true;
+            } else if (Parser.getCurrentToken() instanceof MoveToken) {
+                MoveStatement.parse();
+            } else if (Parser.getCurrentToken() instanceof IfToken) {
+                IfStatement.parse();
             }
+            Parser.nextToken();
         }
         //If no further such token is found return false
         return false;

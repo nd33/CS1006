@@ -21,7 +21,7 @@ public class Error {
 
     public String toString () {
         String result = "Error : ";
-        if (getLineNumber() != 1) {
+        if (getLineNumber() != -1) {
             result += "(" + getLineNumber() + ") ";
         }
         result += getProblem();

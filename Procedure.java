@@ -8,7 +8,7 @@ public class Procedure extends ABSElement {
         Procedure result = new Procedure();
         Parser.nextToken();
         if (!(Parser.getCurrentToken() instanceof IdentifierToken)) {
-            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "A procedure must start with an identifier"));
+            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting identifier after 'PROC'"));
         }
         result.setName(Parser.getCurrentToken().getName());
         Parser.nextToken();

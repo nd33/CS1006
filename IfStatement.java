@@ -18,12 +18,14 @@ public class IfStatement extends Statement {
         if (!(Parser.getCurrentToken() instanceof ElseToken)) {
             //Add Error
             ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting 'ELSE'", "Inserting 'ELSE'"));
+            Parser.moveToNext(new ElseToken(0));
         }
         Parser.nextToken();
         result.setOr(Statements.parse());
         if (!(Parser.getCurrentToken() instanceof  EndIfToken)) {
             //Add Error
             ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting 'ENDIF'", "Inserting 'ENDIF'"));
+            Parser.moveToNext(new ElseToken(0));
         }
         Parser.nextToken();
         return result;
