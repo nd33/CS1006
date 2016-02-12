@@ -18,6 +18,7 @@ public class IfStatement extends Statement {
             ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting 'THEN'", "Inserting 'THEN'"));
             if (!Parser.moveToNextWithinIf(new ThenToken(0))) {
                 result.setEmpty(true);
+                Parser.nextToken();
                 return result;
             }
         }
@@ -28,6 +29,7 @@ public class IfStatement extends Statement {
             ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting 'ELSE' after THEN [Statements]", "Inserting 'ELSE'"));
             if (!Parser.moveToNextWithinIf(new ElseToken(0))) {
                 result.setEmpty(true);
+                Parser.nextToken();
                 return result;
             }
         }
@@ -38,6 +40,7 @@ public class IfStatement extends Statement {
             ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting 'ENDIF'", "Inserting 'ENDIF'"));
             if (!Parser.moveToNextWithinIf(new EndIfToken(0))) {
                 result.setEmpty(true);
+                Parser.nextToken();
                 return result;
             }
         }

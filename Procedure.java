@@ -10,33 +10,33 @@ public class Procedure extends ABSElement {
         if (!(Parser.getCurrentToken() instanceof IdentifierToken)) {
             ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting identifier after 'PROC'"));
             result.setEmpty(true);
-            Parser.moveToNextStatement();
+            Parser.moveToNextStatementWithinProc();
             Statements.parse();
             return result;
         }
         result.setName(Parser.getCurrentToken().getName());
         Parser.nextToken();
         if (!(Parser.getCurrentToken() instanceof LBracketToken)) {
-            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting '(' identifier ')' after PROC identifier"));
+            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting '(' identifier ')' after PROC " + result.getName()));
             result.setEmpty(true);
-            Parser.moveToNextStatement();
+            Parser.moveToNextStatementWithinProc();
             Statements.parse();
             return result;
         }
         Parser.nextToken();
         if (!(Parser.getCurrentToken() instanceof IdentifierToken)) {
-            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting '(' identifier ')' after PROC identifier"));
+            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting '(' identifier ')' after PROC " + result.getName()));
             result.setEmpty(true);
-            Parser.moveToNextStatement();
+            Parser.moveToNextStatementWithinProc();
             Statements.parse();
             return result;
         }
         result.setArgument(Parser.getCurrentToken().getName());
         Parser.nextToken();
         if (!(Parser.getCurrentToken() instanceof RBracketToken)) {
-            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting '(' identifier ')' after PROC identifier"));
+            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting '(' identifier ')' after PROC " + result.getName()));
             result.setEmpty(true);
-            Parser.moveToNextStatement();
+            Parser.moveToNextStatementWithinProc();
             Statements.parse();
             return result;
         }
