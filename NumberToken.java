@@ -7,6 +7,10 @@ public class NumberToken extends Token {
         this.setValue(value);
     }
 
+    public String getName () {
+        return String.valueOf(value);
+    }
+
     @Override public int getValue () {
         return value;
     }

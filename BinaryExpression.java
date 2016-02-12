@@ -73,6 +73,27 @@ public class BinaryExpression extends Expression {
         return result;
     }
 
+    public boolean isOperatorBoolean () {
+        if (this.operator.equals("==") || this.operator.equals("<")|| this.operator.equals(">")|| this.operator.equals("<=")|| this.operator.equals("<=")
+                || this.operator.equals("!=")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public int numberOfBooleanOperators () {
+        int totalBooleanOpperators = 0;
+        totalBooleanOpperators += right.numberOfBooleanOperators();
+        totalBooleanOpperators += left.numberOfBooleanOperators();
+
+        if (this.isOperatorBoolean()) {
+            totalBooleanOpperators += 1;
+        }
+
+        return totalBooleanOpperators;
+    }
+
     public Expression getLeft() {
         return left;
     }

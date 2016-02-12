@@ -14,6 +14,10 @@ public class LBracketToken extends Token {
         setNumberOfLBrackets(getNumberOfLBrackets() + 1);
     }
 
+    public String getName () {
+        return "(";
+    }
+
     public static int getNumberOfLBrackets() {
         return numberOfLBrackets;
     }

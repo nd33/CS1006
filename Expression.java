@@ -19,26 +19,44 @@ public class Expression extends ABSElement {
 
     public static boolean isLegalExpression (ArrayList<Token> expression) {
 
+        boolean result = true;
+        int bracketCounter = 0;
+
         for (int i = 0; i < expression.size(); i ++) {
             if (expression.get(i) instanceof NumberToken || expression.get(i) instanceof IdentifierToken) {
                 if (i == expression.size() - 1) {
-                    return true;
+
                 } else if (!(expression.get(i + 1) instanceof RBracketToken) && !(expression.get(i + 1) instanceof OperatorToken))  {
-                    ErrorLog.logError(new Error(expression.get(i + 1).getLineNumber(), "Expected an operator or ')'"));
-                    return false;
+                    ErrorLog.logError(new Error(expression.get(i + 1).getLineNumber(), "Expected an operator or ')' after '" + expression.get(i).getName() + "'"));
+                    result = false;
                 }
             } else if (expression.get(i) instanceof OperatorToken) {
                 if (i == expression.size() - 1) {
-                    ErrorLog.logError(new Error(expression.get(i).getLineNumber(), "Expecting a number or identifier"));
-                    return false;
+                    ErrorLog.logError(new Error(expression.get(i).getLineNumber(), "Expecting a number or identifier after '" + expression.get(i).getName() + "'"));
+                    result = false;
                 } else if (expression.get(i + 1) instanceof OperatorToken || expression.get(i + 1) instanceof RBracketToken) {
-                    ErrorLog.logError(new Error(expression.get(i).getLineNumber(), "Expecting a number or identifier"));
-                    return false;
+                    ErrorLog.logError(new Error(expression.get(i).getLineNumber(), "Expecting a number or identifier after '" + expression.get(i).getName() + "'"));
+                    result = false;
                 }
+            } else if (expression.get(i) instanceof LBracketToken && i == expression.size() - 1) {
+                ErrorLog.logError(new Error(expression.get(i).getLineNumber(), "Expecting a number or identifier after '" + expression.get(i).getName() + "'"));
+                result = false;
+                bracketCounter ++;
+            } else if (expression.get(i) instanceof RBracketToken) {
+                bracketCounter --;
+            }
+
+            if (bracketCounter < 0) {
+                ErrorLog.logError(new Error(expression.get(i).getLineNumber(), "Expecting '(' before ')'"));
             }
         }
 
-        return true;
+        if (bracketCounter != 0) {
+            ErrorLog.logError(new Error(expression.get(expression.size() - 1).getLineNumber(), "Expecting ')' after '('"));
+            result = false;
+        }
+
+        return result;
     }
 
     //Dijkstra's 'Shunting Yard' algorithm
@@ -112,6 +130,10 @@ public class Expression extends ABSElement {
             return new Expression();
         }
         //Add Error checking for invalid expression end
+    }
+
+    public int numberOfBooleanOperators () {
+        return 0;
     }
 
     public String codeString () {

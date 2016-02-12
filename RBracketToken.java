@@ -15,6 +15,10 @@ public class RBracketToken extends Token {
         setNumberOfRBrackets(getNumberOfRBrackets() + 1);
     }
 
+    public String getName () {
+        return ")";
+    }
+
     public static void setNumberOfRBrackets(int numberOfRBrackets) {
         RBracketToken.numberOfRBrackets = numberOfRBrackets;
     }

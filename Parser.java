@@ -40,6 +40,16 @@ public class Parser {
         return false;
     }
 
+    public static void moveToNextStatement () {
+        while (!(Parser.getCurrentToken() instanceof EOIToken)) {
+            if (Parser.getCurrentToken() instanceof MoveToken || Parser.getCurrentToken() instanceof IfToken ||Parser.getCurrentToken() instanceof MethodCallToken) {
+                return;
+            }
+            Parser.nextToken();
+        }
+    }
+
+
     public static boolean moveToNextWithinIf (Token token) {
         while (!(Parser.getCurrentToken() instanceof EndIfToken)) {
             if (Parser.getCurrentToken().getClass() == token.getClass()) {

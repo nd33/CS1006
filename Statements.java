@@ -11,9 +11,6 @@ public class Statements extends ABSElement {
     public static Statements parse () {
         Statements result = new Statements();
 
-        if (!(Parser.getCurrentToken() instanceof MoveToken) || !(Parser.getCurrentToken() instanceof IfToken) ||!(Parser.getCurrentToken() instanceof MethodCallToken)) {
-            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "A statement must start with a move token, an if token or an identifier token"));
-        }
 
         while (Parser.getCurrentToken() instanceof MoveToken || Parser.getCurrentToken() instanceof IfToken || Parser.getCurrentToken() instanceof MethodCallToken) {
             result.getStatements().add(Statement.parse());

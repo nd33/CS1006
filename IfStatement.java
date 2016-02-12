@@ -8,24 +8,38 @@ public class IfStatement extends Statement {
         IfStatement result = new IfStatement();
         Parser.nextToken();
         result.setCondition(Expression.parse());
+
+        if (!(result.getCondition() instanceof BinaryExpression) || !((BinaryExpression)result.getCondition()).isOperatorBoolean() || result.getCondition().numberOfBooleanOperators() != 1) {
+            ErrorLog.logError(new Error (Parser.getCurrentToken().getLineNumber(), "IF condition must be a boolean expression"));
+        }
+
         if (!(Parser.getCurrentToken() instanceof ThenToken)) {
             //Add Error
             ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting 'THEN'", "Inserting 'THEN'"));
-            Parser.moveToNext(new ThenToken(0));
+            if (!Parser.moveToNextWithinIf(new ThenToken(0))) {
+                result.setEmpty(true);
+                return result;
+            }
         }
         Parser.nextToken();
         result.setThen(Statements.parse());
         if (!(Parser.getCurrentToken() instanceof ElseToken)) {
             //Add Error
-            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting 'ELSE'", "Inserting 'ELSE'"));
-            Parser.moveToNext(new ElseToken(0));
+            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting 'ELSE' after THEN [Statements]", "Inserting 'ELSE'"));
+            if (!Parser.moveToNextWithinIf(new ElseToken(0))) {
+                result.setEmpty(true);
+                return result;
+            }
         }
         Parser.nextToken();
         result.setOr(Statements.parse());
         if (!(Parser.getCurrentToken() instanceof  EndIfToken)) {
             //Add Error
             ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting 'ENDIF'", "Inserting 'ENDIF'"));
-            Parser.moveToNext(new ElseToken(0));
+            if (!Parser.moveToNextWithinIf(new EndIfToken(0))) {
+                result.setEmpty(true);
+                return result;
+            }
         }
         Parser.nextToken();
         return result;

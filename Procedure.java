@@ -9,20 +9,36 @@ public class Procedure extends ABSElement {
         Parser.nextToken();
         if (!(Parser.getCurrentToken() instanceof IdentifierToken)) {
             ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting identifier after 'PROC'"));
+            result.setEmpty(true);
+            Parser.moveToNextStatement();
+            Statements.parse();
+            return result;
         }
         result.setName(Parser.getCurrentToken().getName());
         Parser.nextToken();
         if (!(Parser.getCurrentToken() instanceof LBracketToken)) {
-            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "A '(' must follow the name of the procedure"));
+            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting '(' identifier ')' after PROC identifier"));
+            result.setEmpty(true);
+            Parser.moveToNextStatement();
+            Statements.parse();
+            return result;
         }
         Parser.nextToken();
         if (!(Parser.getCurrentToken() instanceof IdentifierToken)) {
-            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "An identifier must be the argument of the procedure"));
+            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting '(' identifier ')' after PROC identifier"));
+            result.setEmpty(true);
+            Parser.moveToNextStatement();
+            Statements.parse();
+            return result;
         }
         result.setArgument(Parser.getCurrentToken().getName());
         Parser.nextToken();
         if (!(Parser.getCurrentToken() instanceof RBracketToken)) {
-            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "A ')' must follow the argument of the procedure"));
+            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting '(' identifier ')' after PROC identifier"));
+            result.setEmpty(true);
+            Parser.moveToNextStatement();
+            Statements.parse();
+            return result;
         }
         Parser.nextToken();
         result.setBody(Statements.parse());
