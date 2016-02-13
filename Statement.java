@@ -1,5 +1,14 @@
 
 public class Statement extends ABSElement {
+
+    public Statement (Token token) {
+        super(token);
+    }
+
+    public Statement () {
+
+    }
+
     public static Statement parse () {
         Statement result = new Statement();
         if (Parser.getCurrentToken() instanceof MoveToken) {

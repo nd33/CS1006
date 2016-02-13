@@ -4,7 +4,7 @@ public class Parser {
     private static Token currentToken;
     private static ArrayList<Token> input;
     private static String currProcArg;
-    private static ArrayList<String> procedures;
+    private static ArrayList<String> procedures = new ArrayList<String>();
 
     public static void nextToken () {
         if (getCurrentToken() == null) {
@@ -24,6 +24,10 @@ public class Parser {
         } else if (getInput().lastIndexOf(getCurrentToken()) != 0) {
             setCurrentToken(getInput().get(getInput().indexOf(getCurrentToken()) - 1));
         }
+    }
+
+    public static void addProcedure (String name) {
+        procedures.add(name);
     }
 
     public static boolean moveToNext (Token token) {
@@ -82,6 +86,10 @@ public class Parser {
 
     public static Token getCurrentToken() {
         return currentToken;
+    }
+
+    public static ArrayList<String> getProcedures () {
+        return procedures;
     }
 
     public static void setCurrentToken(Token currentToken) {

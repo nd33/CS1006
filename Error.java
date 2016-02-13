@@ -45,7 +45,7 @@ public class Error {
             result += " Try : " + getPotentialSolution();
         }
 
-        if (cause != null) {
+        if (cause != null && cause.getLine() != null) {
             result += " In Line : ";
             for (Token t : cause.getLine()) {
                 if (t == cause) {

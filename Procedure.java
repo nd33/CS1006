@@ -15,6 +15,7 @@ public class Procedure extends ABSElement {
             return result;
         }
         result.setName(Parser.getCurrentToken().getName());
+        Parser.addProcedure(result.name);
         Parser.nextToken();
         if (!(Parser.getCurrentToken() instanceof LBracketToken)) {
             ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting '(' identifier ')' after PROC " + result.getName()));
@@ -42,12 +43,12 @@ public class Procedure extends ABSElement {
         }
         Parser.nextToken();
         result.setBody(Statements.parse());
+
         return result;
     }
 
     public String codeString () {
         Parser.setCurrProcArg(this.getArgument());
-
         return "/" + getName() + " {\n" + getBody().codeString() + "} def\n";
     }
 
