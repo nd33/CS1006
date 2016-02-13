@@ -5,6 +5,13 @@ public class PrimaryExpression extends Expression {
     private boolean isNumber;
     private String name;
 
+    public PrimaryExpression(Token token) {
+        super(token);
+    }
+
+    public PrimaryExpression() {
+    }
+
     public static PrimaryExpression parse (ArrayList<Token> RPNExpression) {
         PrimaryExpression result = new PrimaryExpression();
         if (RPNExpression.get(0) instanceof NumberToken) {

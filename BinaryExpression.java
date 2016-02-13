@@ -5,6 +5,12 @@ public class BinaryExpression extends Expression {
     private Expression left;
     private Expression right;
     private String operator;
+    public BinaryExpression(Token token) {
+        super(token);
+    }
+
+    public BinaryExpression() {
+    }
 
     private static Expression generateTree (ArrayList<Token> expression) {
         Expression tree;

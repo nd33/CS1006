@@ -2,6 +2,13 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 public class Expression extends ABSElement {
+    public Expression(Token token){
+        super(token);
+    }
+
+    public Expression(){
+    }
+
 
     public static ArrayList isolateExpression () {
         ArrayList<Token> result = new ArrayList<Token>();
