@@ -4,6 +4,7 @@ public class Parser {
     private static Token currentToken;
     private static ArrayList<Token> input;
     private static String currProcArg;
+    private static ArrayList<String> procedures;
 
     public static void nextToken () {
         if (getCurrentToken() == null) {

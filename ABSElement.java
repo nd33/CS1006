@@ -5,7 +5,7 @@ public class ABSElement {
     private String line;
 
     public void setEmpty (boolean empty) {
-        empty = empty;
+        this.empty = empty;
     }
 
     public boolean isEmpty() {
