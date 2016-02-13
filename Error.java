@@ -49,7 +49,6 @@ public class Error {
             result += " In Line : ";
             for (Token t : cause.getLine()) {
                 if (t == cause) {
-                    result += "\033[4m";
                     result += "\033[91m";
                 }
                 result += t.getName();

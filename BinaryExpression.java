@@ -15,9 +15,9 @@ public class BinaryExpression extends Expression {
     private static Expression generateTree (ArrayList<Token> expression) {
         Expression tree;
         if (expression.size() == 1 && !(expression.get(0) instanceof IdentifierToken || expression.get(0) instanceof NumberToken)) {
-            tree = new Expression();
+            tree = new Expression(expression.get(0));
         } else if (expression.get(0) instanceof NumberToken) {
-            tree = new PrimaryExpression();
+            tree = new PrimaryExpression(expression.get(0));
             ((PrimaryExpression) tree).setNumber(true);
             ((PrimaryExpression) tree).setValue(expression.get(0).getValue());
             expression.remove(0);
@@ -27,14 +27,14 @@ public class BinaryExpression extends Expression {
             ((PrimaryExpression) tree).setName(expression.get(0).getName());
             expression.remove(0);
         } else if (expression.get(0) instanceof OperatorToken) {
-            tree = new BinaryExpression();
+            tree = new BinaryExpression(expression.get(0));
             ((BinaryExpression) tree).setOperator(expression.get(0).getName());
             expression.remove(0);
             ((BinaryExpression) tree).setRight(generateTree(expression));
             ((BinaryExpression) tree).setLeft(generateTree(expression));
             tree.codeString();
         } else {
-            tree = new Expression();
+            tree = new Expression(expression.get(0));
         }
         return tree;
     }

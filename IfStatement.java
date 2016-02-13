@@ -10,7 +10,7 @@ public class IfStatement extends Statement {
         result.setCondition(Expression.parse());
 
         if (!(result.getCondition() instanceof BinaryExpression) || !((BinaryExpression)result.getCondition()).isOperatorBoolean() || result.getCondition().numberOfBooleanOperators() != 1) {
-            ErrorLog.logError(new Error (Parser.getCurrentToken().getLineNumber(), "IF condition must be a boolean expression"));
+            ErrorLog.logError(new Error (Parser.getCurrentToken().getLineNumber(), "IF condition must be a boolean expression", result.condition.getToken()));
         }
 
         if (!(Parser.getCurrentToken() instanceof ThenToken)) {
