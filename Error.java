@@ -1,8 +1,11 @@
+import java.util.ArrayList;
 
 public class Error {
     private int lineNumber;
     private String problem;
     private String potentialSolution;
+    private Token cause;
+    private ArrayList<Token> line;
 
     public Error (String problem) {
         this.setProblem(problem);

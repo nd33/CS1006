@@ -38,9 +38,12 @@ public class Expression extends ABSElement {
                     ErrorLog.logError(new Error(expression.get(i).getLineNumber(), "Expecting a number or identifier after '" + expression.get(i).getName() + "'"));
                     result = false;
                 }
-            } else if (expression.get(i) instanceof LBracketToken && i == expression.size() - 1) {
-                ErrorLog.logError(new Error(expression.get(i).getLineNumber(), "Expecting a number or identifier after '" + expression.get(i).getName() + "'"));
-                result = false;
+            } else if (expression.get(i) instanceof LBracketToken) {
+                if (i == expression.size() - 1) {
+                    ErrorLog.logError(new Error(expression.get(i).getLineNumber(), "Expecting a number or identifier after '" + expression.get(i).getName() + "'"));
+                    result = false;
+                }
+
                 bracketCounter ++;
             } else if (expression.get(i) instanceof RBracketToken) {
                 bracketCounter --;

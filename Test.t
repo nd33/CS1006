@@ -1,10 +1,10 @@
 PROC T ()
-    IF X == 2 THEN
+    IF 2+2 THEN
         FORWARD 5
         PROC M (J)
 
         FORWARD 4
     ENDIF
     PROC Y (X)
-PROC MAIN ()
+PROC T ()
     FORWARD 3

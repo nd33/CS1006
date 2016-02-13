@@ -19,7 +19,6 @@ public class ProcCallStatement extends Statement {
                     "A ')' must follow the argument of the procedure when you call it"));
         }
         Parser.nextToken();
-        //Parser.nextToken();
         return result;
     }
 
