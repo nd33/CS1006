@@ -46,13 +46,16 @@ public class Error {
         }
 
         if (cause != null) {
-            result += " In : ";
+            result += " In Line : ";
             for (Token t : cause.getLine()) {
                 if (t == cause) {
+                    result += "\033[4m";
                     result += "\033[91m";
                 }
-                result += t.getName() + " ";
-                result += "\033[39m";
+                result += t.getName();
+                result += "\033[0m";
+                result += " ";
+
             }
         }
         return result;

@@ -12,7 +12,7 @@ public abstract class ABSElement {
     public ABSElement(){
     }
     public void setEmpty (boolean empty) {
-        empty = empty;
+        this.empty = empty;
     }
 
     public boolean isEmpty() {
