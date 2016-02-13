@@ -67,73 +67,123 @@ public class Lexer {
     public static ArrayList<Token> tokenise (String input) {
         ArrayList<String> words = pairDoubleOperators(splitIntoWords(input));
         ArrayList <Token> result = new ArrayList<Token>();
+        ArrayList <Token> line = new ArrayList<Token>();
         boolean statment = false;
         boolean proc = false;
         int currentLine = 1;
         Token previousToken = new EOSToken(0);
 
         for (String currentWord : words) {
+            Token t;
             if (currentWord.equals("FORWARD") || currentWord.equals("LEFT") || currentWord.equals("RIGHT")) {
                 if (statment) {
-                    result.add(new EOSToken(currentLine));
+                    t = new EOSToken(currentLine);
+                    t.setLine(line);
+                    line.add(t);
+                    result.add(t);
                 } else {
                     statment = true;
                 }
-                result.add(new MoveToken(currentWord, currentLine));
+                t = new MoveToken(currentWord, currentLine);
+                t.setLine(line);
+                result.add(t);
             } else if (currentWord.equals("+") || currentWord.equals("-") || currentWord.equals("/") || currentWord.equals("*")
                     || currentWord.equals("==") || currentWord.equals("!=") || currentWord.equals("<=") || currentWord.equals(">=")
                     || currentWord.equals("<") || currentWord.equals(">")) {
-                result.add(new OperatorToken(currentWord, currentLine));
-            }else if (currentWord.equals("(")) {
+                t = new OperatorToken(currentWord, currentLine);
+                t.setLine(line);
+                line.add(t);
+                result.add(t);
+            } else if (currentWord.equals("(")) {
                 if (previousToken instanceof IdentifierToken && !proc) {
                     result.set(result.size() - 1, new MethodCallToken(currentLine, previousToken.getName()));
                     if (statment) {
-                        result.add(result.size() - 1, new EOSToken(currentLine));
+                        t = new EOSToken(currentLine);
+                        t.setLine(line);
+                        line.add(line.size() - 1, t);
+                        result.add(result.size() - 1, t);
                     } else {
                         statment = true;
                     }
                 } else {
                     proc = false;
                 }
-                result.add(new LBracketToken(currentLine));
+                t = new LBracketToken(currentLine);
+                t.setLine(line);
+                line.add(t);
+                result.add(t);
             } else if (currentWord.equals(")")) {
-                result.add(new RBracketToken(currentLine));
+                t = new RBracketToken(currentLine);
+                t.setLine(line);
+                line.add(t);
+                result.add(t);
             } else if (currentWord.equals("IF")) {
                 if (statment) {
-                    result.add(new EOSToken(currentLine));
+                    t = new EOSToken(currentLine);
+                    t.setLine(line);
+                    result.add(t);
                 } else {
 
                 }
-                result.add(new IfToken(currentLine));
+                t = new IfToken(currentLine);
+                t.setLine(line);
+                line.add(t);
+                result.add(t);
             } else if (currentWord.equals("THEN")) {
-                result.add(new ThenToken(currentLine));
+                t = new ThenToken(currentLine);
+                t.setLine(line);
+                line.add(t);
+                result.add(t);
             } else if (currentWord.equals("ELSE")) {
                 if (statment) {
-                    result.add(new EOSToken(currentLine));
+                    t = new EOSToken(currentLine);
+                    t.setLine(line);
+                    result.add(t);
                     statment = false;
                 }
-                result.add(new ElseToken(currentLine));
+                t = new ElseToken(currentLine);
+                t.setLine(line);
+                line.add(t);
+                result.add(t);
             } else if (currentWord.equals("ENDIF")) {
                 if (statment) {
-                    result.add(new EOSToken(currentLine));
+                    t = new EOSToken(currentLine);
+                    t.setLine(line);
+                    result.add(t);
                     statment = false;
                 }
-                result.add(new EndIfToken(currentLine));
+                t = new EndIfToken(currentLine);
+                t.setLine(line);
+                line.add(t);
+                result.add(t);
             } else if (currentWord.equals("PROC")) {
-                result.add(new ProcedureToken(currentLine));
+                t = new ProcedureToken(currentLine);
+                t.setLine(line);
+                line.add(t);
+                result.add(t);
                 proc = true;
             } else if (currentWord.equals("0") || (currentWord.charAt(0) > 48 && currentWord.charAt(0) < 58)) {
                 try {
-                    result.add(new NumberToken(Integer.valueOf(currentWord), currentLine));
+                    t = new NumberToken(Integer.valueOf(currentWord), currentLine);
+                    t.setLine(line);
+                    line.add(t);
+                    result.add(t);;
                 } catch (NumberFormatException e) {
                     ErrorLog.logError(new Error(currentLine, currentWord + " is not a legal identifier or number"));
                     //Add zero for the purposes finding further errors
-                    result.add(new NumberToken(0, currentLine));
+                    t = new NumberToken(0, currentLine);
+                    t.setLine(line);
+                    line.add(t);
+                    result.add(t);
                 }
             } else if (currentWord.equals("\n")) {
+                line = new ArrayList<Token>();
                 currentLine ++;
             } else {
-                result.add(new IdentifierToken(currentWord, currentLine));
+                t = new IdentifierToken(currentWord, currentLine);
+                t.setLine(line);
+                line.add(t);
+                result.add(t);
             }
             previousToken = result.get(result.size() - 1);
         }

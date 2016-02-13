@@ -14,7 +14,6 @@ public class IfStatement extends Statement {
         }
 
         if (!(Parser.getCurrentToken() instanceof ThenToken)) {
-            //Add Error
             ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting 'THEN'", "Inserting 'THEN'"));
             if (!Parser.moveToNextWithinIf(new ThenToken(0))) {
                 result.setEmpty(true);
@@ -25,8 +24,7 @@ public class IfStatement extends Statement {
         Parser.nextToken();
         result.setThen(Statements.parse());
         if (!(Parser.getCurrentToken() instanceof ElseToken)) {
-            //Add Error
-            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting 'ELSE' after THEN [Statements]", "Inserting 'ELSE'"));
+            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting 'ELSE' after THEN [Statements]", Parser.getCurrentToken()));
             if (!Parser.moveToNextWithinIf(new ElseToken(0))) {
                 result.setEmpty(true);
                 Parser.nextToken();

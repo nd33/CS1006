@@ -5,7 +5,6 @@ public class Error {
     private String problem;
     private String potentialSolution;
     private Token cause;
-    private ArrayList<Token> line;
 
     public Error (String problem) {
         this.setProblem(problem);
@@ -13,13 +12,27 @@ public class Error {
     }
 
     public Error (int lineNumber, String problem) {
-        this(lineNumber, problem, null);
+        this.lineNumber = lineNumber;
+        this.problem = problem;
+        this.potentialSolution = null;
     }
 
     public Error (int lineNumber, String problem, String potentialSolution) {
         this.setLineNumber(lineNumber);
         this.setProblem(problem);
         this.setPotentialSolution(potentialSolution);
+    }
+
+    public Error (int lineNumber, String problem, String potentialSolution, Token cause) {
+        this.setLineNumber(lineNumber);
+        this.setProblem(problem);
+        this.setPotentialSolution(potentialSolution);
+        this.cause = cause;
+    }
+
+    public Error (int lineNumber, String problem, Token cause) {
+        this(lineNumber, problem);
+        this.cause = cause;
     }
 
     public String toString () {
@@ -30,6 +43,17 @@ public class Error {
         result += getProblem();
         if (getPotentialSolution() != null) {
             result += " Try : " + getPotentialSolution();
+        }
+
+        if (cause != null) {
+            result += " In : ";
+            for (Token t : cause.getLine()) {
+                if (t == cause) {
+                    result += "\033[91m";
+                }
+                result += t.getName() + " ";
+                result += "\033[39m";
+            }
         }
         return result;
     }
