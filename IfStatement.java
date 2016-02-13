@@ -24,7 +24,7 @@ public class IfStatement extends Statement {
         Parser.nextToken();
         result.setThen(Statements.parse());
         if (!(Parser.getCurrentToken() instanceof ElseToken)) {
-            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting 'ELSE' after THEN [Statements]", Parser.getCurrentToken()));
+            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting 'ELSE' after THEN [Statements]"));
             if (!Parser.moveToNextWithinIf(new ElseToken(0))) {
                 result.setEmpty(true);
                 Parser.nextToken();

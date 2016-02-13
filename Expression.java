@@ -39,15 +39,15 @@ public class Expression extends ABSElement {
                 }
             } else if (expression.get(i) instanceof OperatorToken) {
                 if (i == expression.size() - 1) {
-                    ErrorLog.logError(new Error(expression.get(i).getLineNumber(), "Expecting a number or identifier after '" + expression.get(i).getName() + "'"));
+                    ErrorLog.logError(new Error(expression.get(i).getLineNumber(), "Expecting a number or identifier after '" + expression.get(i).getName(), Parser.getCurrentToken() + "'"));
                     result = false;
                 } else if (expression.get(i + 1) instanceof OperatorToken || expression.get(i + 1) instanceof RBracketToken) {
-                    ErrorLog.logError(new Error(expression.get(i).getLineNumber(), "Expecting a number or identifier after '" + expression.get(i).getName() + "'"));
+                    ErrorLog.logError(new Error(expression.get(i).getLineNumber(), "Expecting a number or identifier after '" + expression.get(i).getName(), Parser.getCurrentToken() + "'"));
                     result = false;
                 }
             } else if (expression.get(i) instanceof LBracketToken) {
                 if (i == expression.size() - 1) {
-                    ErrorLog.logError(new Error(expression.get(i).getLineNumber(), "Expecting a number or identifier after '" + expression.get(i).getName() + "'"));
+                    ErrorLog.logError(new Error(expression.get(i).getLineNumber(), "Expecting a number or identifier after '" + expression.get(i).getName(), Parser.getCurrentToken() + "'"));
                     result = false;
                 }
 

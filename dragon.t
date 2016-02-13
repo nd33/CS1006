@@ -3,7 +3,7 @@
 	    IF LEVEL == 0 THEN
 		FORWARD 5
 	    ELSE
-		LDRAGON ( LEVEL - 1 )
+		LDRAGON ( LEVEL - 1
 		LEFT 90
 		RDRAGON ( LEVEL - 1 )
 	    ENDIF
