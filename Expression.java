@@ -34,7 +34,7 @@ public class Expression extends ABSElement {
                 if (i == expression.size() - 1) {
 
                 } else if (!(expression.get(i + 1) instanceof RBracketToken) && !(expression.get(i + 1) instanceof OperatorToken))  {
-                    ErrorLog.logError(new Error(expression.get(i + 1).getLineNumber(), "Expected an operator or ')' after '" + expression.get(i).getName() + "'"));
+                    ErrorLog.logError(new Error(expression.get(i + 1).getLineNumber(), "Expected an operator or ')' after '" + expression.get(i).getName(), Parser.getCurrentToken()));
                     result = false;
                 }
             } else if (expression.get(i) instanceof OperatorToken) {
