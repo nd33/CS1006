@@ -13,7 +13,7 @@ public class PrimaryExpression extends Expression {
     }
 
     public static PrimaryExpression parse (ArrayList<Token> RPNExpression) {
-        PrimaryExpression result = new PrimaryExpression();
+        PrimaryExpression result = new PrimaryExpression(RPNExpression.get(0));
         if (RPNExpression.get(0) instanceof NumberToken) {
             result.setValue(RPNExpression.get(0).getValue());
             result.setNumber(true);
@@ -35,6 +35,7 @@ public class PrimaryExpression extends Expression {
             return "Arg " ;
         }
         else{
+            ErrorLog.logError(new Error (getToken().getLineNumber(), "Undefined identifier '" + getToken().getName() + "'", getToken()));
             return getName() + " ";
         }
     }

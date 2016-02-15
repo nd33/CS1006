@@ -96,7 +96,12 @@ public class Lexer {
                 result.add(t);
             } else if (currentWord.equals("(")) {
                 if (previousToken instanceof IdentifierToken && !proc) {
-                    result.set(result.size() - 1, new MethodCallToken(currentLine, previousToken.getName()));
+                    t = new MethodCallToken(currentLine, previousToken.getName());
+                    t.setLine(previousToken.getLine());
+                    line.add(t);
+                    result.remove(previousToken);
+                    previousToken.getLine().remove(previousToken);
+                    result.add(t);
                     if (statment) {
                         t = new EOSToken(currentLine);
                         t.setLine(line);

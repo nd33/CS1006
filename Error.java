@@ -45,15 +45,18 @@ public class Error {
             result += " Try : " + getPotentialSolution();
         }
 
-        if (cause != null) {
+        if (cause != null && cause.getLine() != null) {
             result += " In Line : ";
             for (Token t : cause.getLine()) {
                 if (t == cause) {
                     result += "\033[91m";
+                    result += t.getName();
+                    result += "\033[0m";
+                    result += " ";
+                } else {
+                    result += t.getName() + " ";
                 }
-                result += t.getName();
-                result += "\033[0m";
-                result += " ";
+
 
             }
         }

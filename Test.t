@@ -1,8 +1,8 @@
 PROC T ()
-    IF 2 != 2 THEN
+    IF 2+2 THEN
         FORWARD 5
-ELSE
-        FORWARD fsdfsd + amamama
+
+        FORWARD 4
     ENDIF
     PROC Y (X)
 PROC T ()

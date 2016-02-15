@@ -22,7 +22,7 @@ public class BinaryExpression extends Expression {
             ((PrimaryExpression) tree).setValue(expression.get(0).getValue());
             expression.remove(0);
         } else if (expression.get(0) instanceof IdentifierToken) {
-            tree = new PrimaryExpression();
+            tree = new PrimaryExpression(expression.get(0));
             ((PrimaryExpression) tree).setNumber(false);
             ((PrimaryExpression) tree).setName(expression.get(0).getName());
             expression.remove(0);
@@ -32,7 +32,6 @@ public class BinaryExpression extends Expression {
             expression.remove(0);
             ((BinaryExpression) tree).setRight(generateTree(expression));
             ((BinaryExpression) tree).setLeft(generateTree(expression));
-            tree.codeString();
         } else {
             tree = new Expression(expression.get(0));
         }

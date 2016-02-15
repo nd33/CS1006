@@ -34,20 +34,20 @@ public class Expression extends ABSElement {
                 if (i == expression.size() - 1) {
 
                 } else if (!(expression.get(i + 1) instanceof RBracketToken) && !(expression.get(i + 1) instanceof OperatorToken))  {
-                    ErrorLog.logError(new Error(expression.get(i + 1).getLineNumber(), "Expected an operator or ')' after '" + expression.get(i).getName(), Parser.getCurrentToken()));
+                    ErrorLog.logError(new Error(expression.get(i + 1).getLineNumber(), "Expected an operator or ')' after '" + expression.get(i).getName(), expression.get(i + 1)));
                     result = false;
                 }
             } else if (expression.get(i) instanceof OperatorToken) {
                 if (i == expression.size() - 1) {
-                    ErrorLog.logError(new Error(expression.get(i).getLineNumber(), "Expecting a number or identifier after '" + expression.get(i).getName(), Parser.getCurrentToken() + "'"));
+                    ErrorLog.logError(new Error(expression.get(i).getLineNumber(), "Expecting a number or identifier after '" + expression.get(i).getName() + "'", expression.get(i + 1)));
                     result = false;
                 } else if (expression.get(i + 1) instanceof OperatorToken || expression.get(i + 1) instanceof RBracketToken) {
-                    ErrorLog.logError(new Error(expression.get(i).getLineNumber(), "Expecting a number or identifier after '" + expression.get(i).getName(), Parser.getCurrentToken() + "'"));
+                    ErrorLog.logError(new Error(expression.get(i).getLineNumber(), "Expecting a number or identifier after '" + expression.get(i).getName() + "'", expression.get(i + 1)));
                     result = false;
                 }
             } else if (expression.get(i) instanceof LBracketToken) {
                 if (i == expression.size() - 1) {
-                    ErrorLog.logError(new Error(expression.get(i).getLineNumber(), "Expecting a number or identifier after '" + expression.get(i).getName(), Parser.getCurrentToken() + "'"));
+                    ErrorLog.logError(new Error(expression.get(i).getLineNumber(), "Expecting a number or identifier after '" + expression.get(i).getName() + "'", expression.get(i + 1)));
                     result = false;
                 }
 
@@ -88,7 +88,7 @@ public class Expression extends ABSElement {
                         result.add(opStack.pop());
                     }
                     opStack.push(currentToken);
-                    result.get(0);
+
                 } else {
                     opStack.push(currentToken);
                 }
@@ -101,16 +101,9 @@ public class Expression extends ABSElement {
 
                 while (!(opStack.peek() instanceof LBracketToken)) {
                     result.add(opStack.pop());
-                    if (opStack.empty()) {
-                        //Mismatched Parentheses Add Error
-                        break;
-                    }
                 }
 
-                if (!opStack.empty()) {
-                    opStack.pop();
-                }
-
+                opStack.pop();
             }
         }
 
