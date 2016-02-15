@@ -2,25 +2,25 @@ import java.util.ArrayList;
 
 public class Lexer {
 
-    private static boolean isOpChar (char c) {
+    private static boolean isOpChar(char c) {
         switch (c) {
-            case '+' :
-            case '-' :
-            case '/' :
-            case '*' :
-            case '(' :
-            case ')' :
-            case '=' :
-            case '<' :
-            case '>' :
-            case '!' :
-            case '\n' :
+            case '+':
+            case '-':
+            case '/':
+            case '*':
+            case '(':
+            case ')':
+            case '=':
+            case '<':
+            case '>':
+            case '!':
+            case '\n':
                 return true;
         }
         return false;
     }
 
-    private static ArrayList<String> splitIntoWords (String input) {
+    private static ArrayList<String> splitIntoWords(String input) {
         ArrayList<String> result = new ArrayList<String>();
         String currentWord = "";
 
@@ -49,14 +49,14 @@ public class Lexer {
         return result;
     }
 
-    private static ArrayList<String> pairDoubleOperators (ArrayList<String> input) {
+    private static ArrayList<String> pairDoubleOperators(ArrayList<String> input) {
         ArrayList<String> result = new ArrayList<String>();
 
-        for (int i = 0; i < input.size(); i ++) {
+        for (int i = 0; i < input.size(); i++) {
             if (i < input.size() - 2 && (input.get(i).equals("=") || input.get(i).equals("<") || input.get(i).equals(">") || input.get(i).equals("!"))
                     && input.get(i + 1).equals("=")) {
                 result.add(input.get(i) + input.get(i + 1));
-                i ++;
+                i++;
             } else {
                 result.add(input.get(i));
             }
@@ -64,10 +64,10 @@ public class Lexer {
         return result;
     }
 
-    public static ArrayList<Token> tokenise (String input) {
+    public static ArrayList<Token> tokenise(String input) {
         ArrayList<String> words = pairDoubleOperators(splitIntoWords(input));
-        ArrayList <Token> result = new ArrayList<Token>();
-        ArrayList <Token> line = new ArrayList<Token>();
+        ArrayList<Token> result = new ArrayList<Token>();
+        ArrayList<Token> line = new ArrayList<Token>();
         boolean statment = false;
         boolean proc = false;
         int currentLine = 1;
@@ -172,7 +172,8 @@ public class Lexer {
                     t = new NumberToken(Integer.valueOf(currentWord), currentLine);
                     t.setLine(line);
                     line.add(t);
-                    result.add(t);;
+                    result.add(t);
+                    ;
                 } catch (NumberFormatException e) {
                     ErrorLog.logError(new Error(currentLine, currentWord + " is not a legal identifier or number"));
                     //Add zero for the purposes finding further errors
@@ -183,7 +184,7 @@ public class Lexer {
                 }
             } else if (currentWord.equals("\n")) {
                 line = new ArrayList<Token>();
-                currentLine ++;
+                currentLine++;
             } else {
                 t = new IdentifierToken(currentWord, currentLine);
                 t.setLine(line);

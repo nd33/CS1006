@@ -6,7 +6,7 @@ public class Parser {
     private static String currProcArg;
     private static ArrayList<String> procedures = new ArrayList<String>();
 
-    public static void nextToken () {
+    public static void nextToken() {
         if (getCurrentToken() == null) {
             return;
         } else if (getInput() == null) {
@@ -16,7 +16,7 @@ public class Parser {
         }
     }
 
-    public static void previousToken () {
+    public static void previousToken() {
         if (getCurrentToken() == null) {
             return;
         } else if (getInput() == null) {
@@ -26,11 +26,11 @@ public class Parser {
         }
     }
 
-    public static void addProcedure (String name) {
+    public static void addProcedure(String name) {
         procedures.add(name);
     }
 
-    public static boolean moveToNext (Token token) {
+    public static boolean moveToNext(Token token) {
         while (!(Parser.getCurrentToken() instanceof EOIToken)) {
             if (Parser.getCurrentToken().getClass() == token.getClass()) {
                 return true;
@@ -45,9 +45,9 @@ public class Parser {
         return false;
     }
 
-    public static void moveToNextStatementWithinProc () {
+    public static void moveToNextStatementWithinProc() {
         while (!(Parser.getCurrentToken() instanceof ProcedureToken && !(Parser.getCurrentToken() instanceof EOIToken))) {
-            if (Parser.getCurrentToken() instanceof MoveToken || Parser.getCurrentToken() instanceof IfToken ||Parser.getCurrentToken() instanceof MethodCallToken) {
+            if (Parser.getCurrentToken() instanceof MoveToken || Parser.getCurrentToken() instanceof IfToken || Parser.getCurrentToken() instanceof MethodCallToken) {
                 return;
             }
             Parser.nextToken();
@@ -55,7 +55,7 @@ public class Parser {
     }
 
 
-    public static boolean moveToNextWithinIf (Token token) {
+    public static boolean moveToNextWithinIf(Token token) {
         while (!(Parser.getCurrentToken() instanceof EndIfToken)) {
             if (Parser.getCurrentToken().getClass() == token.getClass()) {
                 return true;
@@ -74,7 +74,7 @@ public class Parser {
         return false;
     }
 
-    public static Root parse (ArrayList<Token> input) {
+    public static Root parse(ArrayList<Token> input) {
         Root program = new Root();
         Parser.setInput(input);
         if (input.size() > 0) {
@@ -88,7 +88,7 @@ public class Parser {
         return currentToken;
     }
 
-    public static ArrayList<String> getProcedures () {
+    public static ArrayList<String> getProcedures() {
         return procedures;
     }
 

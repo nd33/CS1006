@@ -1,15 +1,15 @@
 
 public class Statement extends ABSElement {
 
-    public Statement (Token token) {
+    public Statement(Token token) {
         super(token);
     }
 
-    public Statement () {
+    public Statement() {
 
     }
 
-    public static Statement parse () {
+    public static Statement parse() {
         Statement result = new Statement();
         if (Parser.getCurrentToken() instanceof MoveToken) {
             result = MoveStatement.parse();
@@ -21,12 +21,12 @@ public class Statement extends ABSElement {
             Parser.nextToken();
         } else {
             ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(),
-                    "A statement must start with a move token, an if token or an identifier token"));
+                    "A statement must start with a move token, an if token or an identifier token", Parser.getCurrentToken()));
         }
         return result;
     }
 
-    public String codeString () {
+    public String codeString() {
         return "";
     }
 }

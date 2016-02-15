@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main (String[] args){
+    public static void main(String[] args) {
 
         try {
             Scanner consoleInput = new Scanner(System.in);
@@ -19,10 +19,9 @@ public class Main {
 
             System.out.println("Enter output file name");
             String outFileName = consoleInput.next();
-            if(!outFileName.endsWith(".ps" ) && !outFileName.endsWith(".eps")){
+            if (!outFileName.endsWith(".ps") && !outFileName.endsWith(".eps")) {
                 outFileName += ".ps";
             }
-
 
 
             if (ErrorLog.containsErrors()) {
@@ -40,8 +39,7 @@ public class Main {
             }
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
-        }
-        catch(IOException IO){
+        } catch (IOException IO) {
             System.out.println(IO.getMessage());
         }
     }

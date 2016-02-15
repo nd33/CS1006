@@ -1,9 +1,9 @@
 public class ElseToken extends Token {
-    public ElseToken (int lineNumber) {
+    public ElseToken(int lineNumber) {
         super(lineNumber);
     }
 
-    public String getName () {
+    public String getName() {
         return "ELSE";
     }
 }

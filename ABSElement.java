@@ -1,40 +1,13 @@
 
 public abstract class ABSElement {
-    private boolean empty;
-    private int lineNumber;
-    private String line;
     private Token token;
 
-    public ABSElement(Token token){
+    public ABSElement(Token token) {
         this.setToken(token);
     }
 
-    public ABSElement(){
+    public ABSElement() { //default constructor
     }
-    public void setEmpty (boolean empty) {
-        this.empty = empty;
-    }
-
-    public boolean isEmpty() {
-        return empty;
-    }
-
-    public int getLineNumber() {
-        return lineNumber;
-    }
-
-    public void setLineNumber(int lineNumber) {
-        this.lineNumber = lineNumber;
-    }
-
-    public String getLine() {
-        return line;
-    }
-
-    public void setLine(String line) {
-        this.line = line;
-    }
-
 
     public Token getToken() {
         return token;

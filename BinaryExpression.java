@@ -5,14 +5,12 @@ public class BinaryExpression extends Expression {
     private Expression left;
     private Expression right;
     private String operator;
+
     public BinaryExpression(Token token) {
         super(token);
     }
 
-    public BinaryExpression() {
-    }
-
-    private static Expression generateTree (ArrayList<Token> expression) {
+    private static Expression generateTree(ArrayList<Token> expression) {
         Expression tree;
         if (expression.size() == 1 && !(expression.get(0) instanceof IdentifierToken || expression.get(0) instanceof NumberToken)) {
             tree = new Expression(expression.get(0));
@@ -38,14 +36,14 @@ public class BinaryExpression extends Expression {
         return tree;
     }
 
-    public static BinaryExpression parse (ArrayList<Token> RPNExpression) {
-        BinaryExpression result = new BinaryExpression();
+    public static BinaryExpression parse(ArrayList<Token> RPNExpression) {
+        BinaryExpression result;
         Collections.reverse(RPNExpression);
-        result = (BinaryExpression)generateTree(RPNExpression);
+        result = (BinaryExpression) generateTree(RPNExpression);
         return result;
     }
 
-    static String opToPostScriptCode (String operator) {
+    static String opToPostScriptCode(String operator) {
         if (operator.equals("+")) {
             return "add";
         } else if (operator.equals("-")) {
@@ -70,7 +68,7 @@ public class BinaryExpression extends Expression {
         return "";
     }
 
-    public String codeString () {
+    public String codeString() {
         String result = "";
         result += getLeft().codeString();
         result += getRight().codeString();
@@ -78,8 +76,8 @@ public class BinaryExpression extends Expression {
         return result;
     }
 
-    public boolean isOperatorBoolean () {
-        if (this.operator.equals("==") || this.operator.equals("<")|| this.operator.equals(">")|| this.operator.equals("<=")|| this.operator.equals("<=")
+    public boolean isOperatorBoolean() {
+        if (this.operator.equals("==") || this.operator.equals("<") || this.operator.equals(">") || this.operator.equals("<=") || this.operator.equals("<=")
                 || this.operator.equals("!=")) {
             return true;
         } else {
@@ -87,7 +85,7 @@ public class BinaryExpression extends Expression {
         }
     }
 
-    public int numberOfBooleanOperators () {
+    public int numberOfBooleanOperators() {
         int totalBooleanOpperators = 0;
         totalBooleanOpperators += right.numberOfBooleanOperators();
         totalBooleanOpperators += left.numberOfBooleanOperators();

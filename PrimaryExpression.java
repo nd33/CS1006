@@ -9,10 +9,8 @@ public class PrimaryExpression extends Expression {
         super(token);
     }
 
-    public PrimaryExpression() {
-    }
 
-    public static PrimaryExpression parse (ArrayList<Token> RPNExpression) {
+    public static PrimaryExpression parse(ArrayList<Token> RPNExpression) {
         PrimaryExpression result = new PrimaryExpression(RPNExpression.get(0));
         if (RPNExpression.get(0) instanceof NumberToken) {
             result.setValue(RPNExpression.get(0).getValue());
@@ -24,18 +22,16 @@ public class PrimaryExpression extends Expression {
             ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(),
                     "A primary expression should start with a number or an identifier !"));
         }
-        //Parser.nextToken();
         return result;
     }
 
-    public String codeString () {
+    public String codeString() {
         if (isNumber()) {
             return getValue() + " ";
-        }else if(this.getName().equals(Parser.getCurrProcArg())){
-            return "Arg " ;
-        }
-        else{
-            ErrorLog.logError(new Error (getToken().getLineNumber(), "Undefined identifier '" + getToken().getName() + "'", getToken()));
+        } else if (this.getName().equals(Parser.getCurrProcArg())) {
+            return "Arg ";
+        } else {
+            ErrorLog.logError(new Error(getToken().getLineNumber(), "Undefined identifier '" + getToken().getName() + "'", getToken()));
             return getName() + " ";
         }
     }

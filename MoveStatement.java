@@ -4,20 +4,18 @@ public class MoveStatement extends Statement {
     private String move;
     private Expression argument;
 
-    public static MoveStatement parse () {
+    public static MoveStatement parse() {
         MoveStatement result = new MoveStatement();
         result.setMove(Parser.getCurrentToken().getName());
         Parser.nextToken();
         if (!(Parser.getCurrentToken() instanceof NumberToken) && !(Parser.getCurrentToken() instanceof IdentifierToken) && !(Parser.getCurrentToken() instanceof LBracketToken)) {
-            //Add Error
-            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting expression after " + result.getMove()));
+            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting expression after " + result.getMove(), Parser.getCurrentToken()));
         }
         result.setArgument(Expression.parse());
         return result;
     }
 
-
-    public String codeString () {
+    public String codeString() {
         return getArgument().codeString() + " " + getMove() + "\n";
     }
 

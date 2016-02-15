@@ -16,11 +16,10 @@ public class FileManager {
         return result;
     }
 
-    static void writeStringToFile (String string, String fileLocation) throws IOException {
+    static void writeStringToFile(String string, String fileLocation) throws IOException {
         PrintWriter printWriter = new PrintWriter(fileLocation);
         printWriter.print(string);
         printWriter.close();
-
     }
 
 }

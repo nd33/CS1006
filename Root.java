@@ -3,21 +3,19 @@ import java.util.ArrayList;
 public class Root extends ABSElement {
     private ArrayList<Procedure> procs;
 
-    public Root () {
+    public Root() {
         setProcs(new ArrayList<Procedure>());
     }
 
-    public static Root parse () {
+    public static Root parse() {
         Root result = new Root();
         if (Parser.getCurrentToken() == null) {
-            result.setEmpty(true);
             return result;
         }
 
         if (!(Parser.getCurrentToken() instanceof ProcedureToken)) {
             ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Program must start with a procedure"));
             if (!Parser.moveToNext(new ProcedureToken(0))) {
-                result.setEmpty(true);
                 return result;
             }
         }
@@ -34,7 +32,7 @@ public class Root extends ABSElement {
                 mainPresent = true;
             }
             if (procNames.contains(p.getName())) {
-                ErrorLog.logError(new Error("Redefinition of procedure " + p.getName()));
+                ErrorLog.logError(new Error(p.getToken().getLineNumber(), "Redefinition of procedure " + p.getName(), p.getToken()));
             }
             procNames.add(p.getName());
         }
@@ -46,7 +44,7 @@ public class Root extends ABSElement {
         return result;
     }
 
-    public String codeString () {
+    public String codeString() {
         String result = "";
         for (Procedure p : getProcs()) {
             result += p.codeString();

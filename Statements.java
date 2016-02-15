@@ -8,7 +8,7 @@ public class Statements extends ABSElement {
         setStatements(new ArrayList<Statement>());
     }
 
-    public static Statements parse () {
+    public static Statements parse() {
         Statements result = new Statements();
 
 
@@ -18,7 +18,7 @@ public class Statements extends ABSElement {
         return result;
     }
 
-    public String codeString () {
+    public String codeString() {
         String result = "";
         for (Statement s : getStatements()) {
             result += s.codeString();

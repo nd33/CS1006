@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+
 
 public class Error {
     private int lineNumber;
@@ -6,36 +6,36 @@ public class Error {
     private String potentialSolution;
     private Token cause;
 
-    public Error (String problem) {
+    public Error(String problem) {
         this.setProblem(problem);
         setLineNumber(-1);
     }
 
-    public Error (int lineNumber, String problem) {
+    public Error(int lineNumber, String problem) {
         this.lineNumber = lineNumber;
         this.problem = problem;
         this.potentialSolution = null;
     }
 
-    public Error (int lineNumber, String problem, String potentialSolution) {
+    public Error(int lineNumber, String problem, String potentialSolution) {
         this.setLineNumber(lineNumber);
         this.setProblem(problem);
         this.setPotentialSolution(potentialSolution);
     }
 
-    public Error (int lineNumber, String problem, String potentialSolution, Token cause) {
+    public Error(int lineNumber, String problem, String potentialSolution, Token cause) {
         this.setLineNumber(lineNumber);
         this.setProblem(problem);
         this.setPotentialSolution(potentialSolution);
         this.cause = cause;
     }
 
-    public Error (int lineNumber, String problem, Token cause) {
+    public Error(int lineNumber, String problem, Token cause) {
         this(lineNumber, problem);
         this.cause = cause;
     }
 
-    public String toString () {
+    public String toString() {
         String result = "Error : ";
         if (getLineNumber() != -1) {
             result += "(" + getLineNumber() + ") ";

@@ -2,15 +2,15 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 public class Expression extends ABSElement {
-    public Expression(Token token){
+    public Expression(Token token) {
         super(token);
     }
 
-    public Expression(){
+    public Expression() {
     }
 
 
-    public static ArrayList isolateExpression () {
+    public static ArrayList isolateExpression() {
         ArrayList<Token> result = new ArrayList<Token>();
 
         while (Parser.getCurrentToken() instanceof NumberToken || Parser.getCurrentToken() instanceof IdentifierToken ||
@@ -24,16 +24,16 @@ public class Expression extends ABSElement {
         return result;
     }
 
-    public static boolean isLegalExpression (ArrayList<Token> expression) {
+    public static boolean isLegalExpression(ArrayList<Token> expression) {
 
         boolean result = true;
         int bracketCounter = 0;
 
-        for (int i = 0; i < expression.size(); i ++) {
+        for (int i = 0; i < expression.size(); i++) {
             if (expression.get(i) instanceof NumberToken || expression.get(i) instanceof IdentifierToken) {
                 if (i == expression.size() - 1) {
 
-                } else if (!(expression.get(i + 1) instanceof RBracketToken) && !(expression.get(i + 1) instanceof OperatorToken))  {
+                } else if (!(expression.get(i + 1) instanceof RBracketToken) && !(expression.get(i + 1) instanceof OperatorToken)) {
                     ErrorLog.logError(new Error(expression.get(i + 1).getLineNumber(), "Expected an operator or ')' after '" + expression.get(i).getName(), expression.get(i + 1)));
                     result = false;
                 }
@@ -51,18 +51,18 @@ public class Expression extends ABSElement {
                     result = false;
                 }
 
-                bracketCounter ++;
+                bracketCounter++;
             } else if (expression.get(i) instanceof RBracketToken) {
-                bracketCounter --;
+                bracketCounter--;
             }
 
             if (bracketCounter < 0) {
-                ErrorLog.logError(new Error(expression.get(i).getLineNumber(), "Expecting '(' before ')'"));
+                ErrorLog.logError(new Error(expression.get(i).getLineNumber(), "Expecting '(' before ')'", expression.get(i)));
             }
         }
 
         if (bracketCounter != 0) {
-            ErrorLog.logError(new Error(expression.get(expression.size() - 1).getLineNumber(), "Expecting ')' after '('"));
+            ErrorLog.logError(new Error(expression.get(expression.size() - 1).getLineNumber(), "Expecting ')' after '('", expression.get(expression.size() - 1)));
             result = false;
         }
 
@@ -70,12 +70,12 @@ public class Expression extends ABSElement {
     }
 
     //Dijkstra's 'Shunting Yard' algorithm
-    public static ArrayList<Token> generateRPNExpression (ArrayList<Token> expression) {
+    public static ArrayList<Token> generateRPNExpression(ArrayList<Token> expression) {
         ArrayList<Token> result = new ArrayList<Token>();
         Stack<Token> opStack = new Stack<Token>();
 
         for (Token currentToken : expression) {
-            if (currentToken instanceof  NumberToken || currentToken instanceof IdentifierToken) {
+            if (currentToken instanceof NumberToken || currentToken instanceof IdentifierToken) {
 
                 result.add(currentToken);
 
@@ -114,12 +114,11 @@ public class Expression extends ABSElement {
         return result;
     }
 
-    public static Expression parse () {
+    public static Expression parse() {
         ArrayList<Token> expression = isolateExpression();
 
         if (!isLegalExpression(expression)) {
             Expression e = new Expression();
-            e.setEmpty(true);
             return e;
         }
 
@@ -129,17 +128,16 @@ public class Expression extends ABSElement {
         } else if (!RPNExpression.isEmpty()) {
             return BinaryExpression.parse(RPNExpression);
         } else {
-            //Add Error
+            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expression should contain at least one number", Parser.getCurrentToken()));
             return new Expression();
         }
-        //Add Error checking for invalid expression end
     }
 
-    public int numberOfBooleanOperators () {
+    public int numberOfBooleanOperators() {
         return 0;
     }
 
-    public String codeString () {
+    public String codeString() {
         return "";
     }
 }

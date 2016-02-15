@@ -2,17 +2,18 @@
 public class OperatorToken extends Token {
     private String operator;
 
-    public OperatorToken (String operator, int lineNumber)
-    {
+    public OperatorToken(String operator, int lineNumber) {
         super(lineNumber);
         this.setOperator(operator);
     }
 
-    @Override public String getName () {
+    @Override
+    public String getName() {
         return getOperator();
     }
 
-    @Override public int getPrecedence () {
+    @Override
+    public int getPrecedence() {
         if (getOperator().equals("+") || getOperator().equals("-")) {
             return 3;
         } else if (getOperator().equals("*") || getOperator().equals("/")) {
