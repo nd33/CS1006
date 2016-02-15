@@ -1,5 +1,5 @@
 PROC T ()
-    IF 2+2 THEN
+    IF 2+++-2 THEN
         FORWARD asdasd + asdasd
         M (5)
         FORWARD 4

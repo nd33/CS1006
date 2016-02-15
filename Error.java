@@ -50,10 +50,13 @@ public class Error {
             for (Token t : cause.getLine()) {
                 if (t == cause) {
                     result += "\033[91m";
+                    result += t.getName();
+                    result += "\033[0m";
+                    result += " ";
+                } else {
+                    result += t.getName() + " ";
                 }
-                result += t.getName();
-                result += "\033[0m";
-                result += " ";
+
 
             }
         }
