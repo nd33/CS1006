@@ -12,6 +12,11 @@ public class MoveStatement extends Statement {
             ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting expression after " + result.getMove(), Parser.getCurrentToken()));
         }
         result.setArgument(Expression.parse());
+
+        if (result.argument.numberOfBooleanOperators() != 0) {
+            ErrorLog.logError(new Error(result.argument.getToken().getLineNumber(), "Argument cannot contain boolean operators", result.argument.getToken()));
+        }
+
         return result;
     }
 

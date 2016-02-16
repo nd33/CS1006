@@ -25,7 +25,7 @@ public abstract class Token {
     }
 
     public String getName() {
-        return "";
+        return " ";
     }
 
     public ArrayList<Token> getLine() {

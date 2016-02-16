@@ -38,6 +38,8 @@ public class Parser {
                 MoveStatement.parse();
             } else if (Parser.getCurrentToken() instanceof IfToken) {
                 IfStatement.parse();
+            } else if (Parser.getCurrentToken() instanceof MethodCallToken) {
+                ProcCallStatement.parse();
             }
             Parser.nextToken();
         }

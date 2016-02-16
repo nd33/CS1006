@@ -53,6 +53,10 @@ public class Expression extends ABSElement {
 
                 bracketCounter++;
             } else if (expression.get(i) instanceof RBracketToken) {
+                if (i != expression.size() - 1 && !(expression.get(i + 1) instanceof OperatorToken) && !(expression.get(i + 1) instanceof RBracketToken)) {
+                    ErrorLog.logError(new Error(expression.get(i + 1).getLineNumber(), "Expecting operator or ')' after ')'", expression.get(i + 1)));
+                    result = false;
+                }
                 bracketCounter--;
             }
 

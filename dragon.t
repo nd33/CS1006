@@ -1,5 +1,5 @@
 
-	PROC LDRAGON ( LEVEL )
+	PR LDRAGON ( LEVEL )
 	    IF LEVEL == 0 THEN
 		FORWARD 5
 	    ELSE
@@ -10,7 +10,7 @@
 
 
 	PROC RDRAGON ( LEVEL )
-	    IF LEVEL == 0 THEN
+	    IF LEVEL == 0 THEN fdsfdsfsf
 		FORWARD 5
 	    ELSE
 		LDRAGON ( LEVEL - 1 )
@@ -18,5 +18,5 @@
 		RDRAGON ( LEVEL - 1 )
 	    ENDIF
 
-	PROC MAIN (VOID)
+	PROC  (VOID)
 	   LDRAGON ( 11 )

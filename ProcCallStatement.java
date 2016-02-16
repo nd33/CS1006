@@ -22,6 +22,10 @@ public class ProcCallStatement extends Statement {
                     "A ')' must follow the argument of the procedure when you call it"));
         }
 
+        if (result.argument.numberOfBooleanOperators() != 0) {
+            ErrorLog.logError(new Error(result.argument.getToken().getLineNumber(), "Argument cannot contain boolean operators", result.argument.getToken()));
+        }
+
         Parser.nextToken();
         return result;
     }

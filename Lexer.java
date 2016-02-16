@@ -138,6 +138,7 @@ public class Lexer {
                 t = new ThenToken(currentLine);
                 t.setLine(line);
                 line.add(t);
+                statment = false;
                 result.add(t);
             } else if (currentWord.equals("ELSE")) {
                 if (statment) {
