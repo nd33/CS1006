@@ -47,7 +47,7 @@ public class Expression extends ABSElement {
                 }
             } else if (expression.get(i) instanceof LBracketToken) {
                 if (i == expression.size() - 1) {
-                    ErrorLog.logError(new Error(expression.get(i).getLineNumber(), "Expecting a number or identifier after '" + expression.get(i).getName() + "'", expression.get(i + 1)));
+                    ErrorLog.logError(new Error(expression.get(i).getLineNumber(), "Expecting a number or identifier after '" + expression.get(i).getName() + "'", expression.get(i)));
                     result = false;
                 }
 

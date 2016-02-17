@@ -1,9 +1,9 @@
 PRO T ()
     IF 22 THEN
-        FORWARD
+        FORWARD 5
 
         FORWARD 4
     ENDIF
-    PROC Y X)
+    PROC Y (X)
 PROC T ()
-    FORWARD 3
+    FORWARD

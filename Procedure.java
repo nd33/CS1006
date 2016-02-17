@@ -19,14 +19,14 @@ public class Procedure extends ABSElement {
         Parser.addProcedure(result.name);
         Parser.nextToken();
         if (!(Parser.getCurrentToken() instanceof LBracketToken)) {
-            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting '(' identifier ')' after PROC ", Parser.getCurrentToken() + result.getName()));
+            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting '(' identifier ')' after PROC ", Parser.getCurrentToken()));
             Parser.moveToNextStatementWithinProc();
             Statements.parse();
             return result;
         }
         Parser.nextToken();
         if (!(Parser.getCurrentToken() instanceof IdentifierToken)) {
-            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting '(' identifier ')' after PROC ", Parser.getCurrentToken() + result.getName()));
+            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting '(' identifier ')' after PROC ", Parser.getCurrentToken()));
             Parser.moveToNextStatementWithinProc();
             Statements.parse();
             return result;
@@ -34,7 +34,7 @@ public class Procedure extends ABSElement {
         result.setArgument(Parser.getCurrentToken().getName());
         Parser.nextToken();
         if (!(Parser.getCurrentToken() instanceof RBracketToken)) {
-            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting '(' identifier ')' after PROC ", Parser.getCurrentToken() + result.getName()));
+            ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Expecting '(' identifier ')' after PROC ", Parser.getCurrentToken()));
             Parser.moveToNextStatementWithinProc();
             Statements.parse();
             return result;
