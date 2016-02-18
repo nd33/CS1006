@@ -70,9 +70,13 @@ public class BinaryExpression extends Expression {
 
     public String codeString() {
         String result = "";
-        result += getLeft().codeString();
-        result += getRight().codeString();
-        result += opToPostScriptCode(getOperator()) + " ";
+        if (left != null) {
+            result += left.codeString();
+        }
+        if (right != null) {
+            result += right.codeString();
+        }
+        result += opToPostScriptCode(operator) + " ";
         return result;
     }
 

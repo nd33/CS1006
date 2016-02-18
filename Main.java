@@ -23,20 +23,15 @@ public class Main {
                 outFileName += ".ps";
             }
 
+            String output = CodeGenerator.generateCodeText(program);
 
             if (ErrorLog.containsErrors()) {
                 ErrorLog.displayErrors();
                 return;
             } else {
-                String output = CodeGenerator.generateCodeText(program);
-
-                if (ErrorLog.containsErrors()) {
-                    ErrorLog.displayErrors();
-                    return;
-                } else {
-                    FileManager.writeStringToFile(CodeGenerator.generateCodeText(program), outFileName);
-                }
+                FileManager.writeStringToFile(output, outFileName);
             }
+
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         } catch (IOException IO) {

@@ -21,7 +21,13 @@ public class MoveStatement extends Statement {
     }
 
     public String codeString() {
-        return getArgument().codeString() + " " + getMove() + "\n";
+        String result = "";
+        if (argument != null) {
+            result += argument.codeString();
+        }
+        result += " " + move + "\n";
+        return result;
+        //return getArgument().codeString() + " " + getMove() + "\n";
     }
 
     public String getMove() {

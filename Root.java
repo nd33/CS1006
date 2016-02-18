@@ -47,7 +47,9 @@ public class Root extends ABSElement {
     public String codeString() {
         String result = "";
         for (Procedure p : getProcs()) {
-            result += p.codeString();
+            if (p != null) {
+                result += p.codeString();
+            }
         }
         return result;
     }

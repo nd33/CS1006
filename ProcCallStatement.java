@@ -34,7 +34,13 @@ public class ProcCallStatement extends Statement {
         if (!Parser.getProcedures().contains(procedure)) {
             ErrorLog.logError(new Error(Parser.getCurrentToken().getLineNumber(), "Undefined identifier '" + procedure + "'", getToken()));
         }
-        return "Arg " + getArgument().codeString() + " /Arg exch def " + getProcedure() + " /Arg exch def " + "\n";
+        String result = "Arg ";
+        if (argument != null) {
+            result += argument.codeString();
+        }
+        result += " /Arg exch def " + getProcedure() + " /Arg exch def " + "\n";
+        return result;
+        //return "Arg " + getArgument().codeString() + " /Arg exch def " + getProcedure() + " /Arg exch def " + "\n";
     }
 
     public String getProcedure() {

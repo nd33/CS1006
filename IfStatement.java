@@ -43,7 +43,21 @@ public class IfStatement extends Statement {
     }
 
     public String codeString() {
-        return getCondition().codeString() + "{\n" + getThen().codeString() + "} {\n" + getOr().codeString() + "} ifelse \n";
+        String result = "";
+        if (condition != null) {
+            result += condition.codeString();
+        }
+        result += "{\n";
+        if (then != null) {
+            result += then.codeString();
+        }
+        result += "} {\n";
+        if (or != null) {
+            result += or.codeString();
+        }
+        result += "} ifelse \n";
+        return result;
+        //return getCondition().codeString() + "{\n" + getThen().codeString() + "} {\n" + getOr().codeString() + "} ifelse \n";
     }
 
     public Statements getThen() {

@@ -21,7 +21,10 @@ public class Statements extends ABSElement {
     public String codeString() {
         String result = "";
         for (Statement s : getStatements()) {
-            result += s.codeString();
+            if (s != null) {
+                result += s.codeString();
+            }
+
         }
         return result;
     }
