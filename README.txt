@@ -1,0 +1,1 @@
+remember to put LOGO files in project folder.
